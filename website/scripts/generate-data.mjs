@@ -1,11 +1,14 @@
-// Parses ../README.md (the awesome list) into src/data/projects.json.
-// Run automatically before build so the site always mirrors the list.
-import { readFileSync, writeFileSync } from "node:fs";
+// Parses ../README.md (the awesome list) into src/data/projects.json and
+// copies the market map into public/. Run automatically before dev/build so
+// the site always mirrors the list. Creates its target directories because
+// they only hold generated (gitignored) files and are absent in a fresh clone.
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const readme = readFileSync(join(here, "..", "..", "README.md"), "utf8");
+const root = join(here, "..");
+const readme = readFileSync(join(root, "..", "README.md"), "utf8");
 
 const CATEGORIES = [
   "AI coworkers and teammates",
@@ -44,5 +47,15 @@ for (const line of readme.split("\n")) {
   }
 }
 
-writeFileSync(join(here, "..", "src", "data", "projects.json"), JSON.stringify(data, null, 2));
+mkdirSync(join(root, "src", "data"), { recursive: true });
+writeFileSync(join(root, "src", "data", "projects.json"), JSON.stringify(data, null, 2));
 console.log(`generated projects.json: ${data.map((c) => `${c.name}=${c.projects.length}`).join(", ")}`);
+
+mkdirSync(join(root, "public"), { recursive: true });
+const map = join(root, "..", "media", "market-map.svg");
+if (existsSync(map)) {
+  copyFileSync(map, join(root, "public", "market-map.svg"));
+  console.log("copied market-map.svg");
+} else {
+  console.warn("WARN media/market-map.svg missing; run scripts/market_map.py first");
+}

@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/generate-data.mjs && cp ../media/market-map.svg public/market-map.svg || true",
-    "prebuild": "node scripts/generate-data.mjs && cp ../media/market-map.svg public/market-map.svg || true",
+    "predev": "node scripts/generate-data.mjs",
+    "prebuild": "node scripts/generate-data.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
