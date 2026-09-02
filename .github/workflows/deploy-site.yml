@@ -1,0 +1,33 @@
+name: deploy-site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - README.md
+      - website/**
+      - scripts/market_map.py
+      - .github/workflows/deploy-site.yml
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate fresh market map
+        run: python3 scripts/market_map.py README.md media/market-map.svg
+      - name: Build site
+        working-directory: website
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Deploy to Cloudflare Workers
+        working-directory: website
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@latest deploy

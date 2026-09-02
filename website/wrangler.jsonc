@@ -1,0 +1,10 @@
+{
+  // Serves the built Astro site as a Cloudflare Worker with static assets.
+  // The custom domains (aiagentplatforms.dev, www) are attached at the account
+  // level via the Workers Custom Domains API and persist across deploys.
+  "name": "aiagentplatforms",
+  "compatibility_date": "2026-09-02",
+  "assets": {
+    "directory": "./dist"
+  }
+}
