@@ -54,86 +54,126 @@ def avatar_b64(org):
             return None
     return base64.b64encode(p.read_bytes()).decode()
 
-# Layout constants
-TILE = 108          # tile width
-TILE_H = 96         # tile height (icon + label)
-ICON = 52
-PAD = 18            # inner padding of category box
-GAP_Y = 26          # gap between boxes
-HEADER = 74         # svg header area
-BOX_TITLE = 40
-W = 1440
-COLS_WIDE = 12      # tiles per row in a full-width box
+# Design tokens (validated reference dataviz palette).
+# Color is an accent on each category header, in fixed slot order; text stays
+# in ink tokens; containers are recessive surfaces with hairline borders.
+PAGE = "#f9f9f7"        # page plane
+SURFACE = "#fcfcfb"     # card surface
+INK = "#0b0b0b"         # primary ink
+INK2 = "#52514e"        # secondary ink
+MUTED = "#898781"       # muted labels
+HAIRLINE = "#e1e0d9"    # hairline border on the page plane
+FONT = 'system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif'
+ACCENT = {              # categorical slots 1-5, fixed order
+    "AI coworkers and teammates": "#2a78d6",
+    "Agent builders and frameworks": "#1baf7a",
+    "Workflow automation platforms": "#eda100",
+    "Browser agents": "#008300",
+    "Coding agents": "#4a3aa7",
+}
 
-FILL = {
-    "AI coworkers and teammates": "#EEF4FF",
-    "Agent builders and frameworks": "#F0FBF4",
-    "Workflow automation platforms": "#FFF7EC",
-    "Browser agents": "#F7F0FF",
-    "Coding agents": "#FDF0F3",
-}
-STROKE = {
-    "AI coworkers and teammates": "#3B6FD4",
-    "Agent builders and frameworks": "#2F9E5F",
-    "Workflow automation platforms": "#D48A2F",
-    "Browser agents": "#8A5FD4",
-    "Coding agents": "#D4527A",
-}
+# Layout on an 8px grid
+W = 1440
+MARGIN = 40             # page margin
+CARD_PAD = 24           # card inner padding
+TILE_W = 128
+TILE_H = 104            # 48 logo + gap + up to 2 label lines
+LOGO = 48
+CARD_TITLE_H = 48
+CARD_GAP = 24
+HEADER_H = 104
 
 def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
+def wrap_label(name, max_chars=15):
+    """Split a long name onto two lines at the space nearest the middle."""
+    if len(name) <= max_chars or " " not in name:
+        return [name]
+    spaces = [i for i, ch in enumerate(name) if ch == " "]
+    mid = min(spaces, key=lambda i: abs(i - len(name) // 2))
+    return [name[:mid], name[mid + 1:]]
+
 svg = []
-y = HEADER
 body = []
+defs = (
+    '<defs><clipPath id="logoclip">'
+    f'<rect x="0" y="0" width="{LOGO}" height="{LOGO}" rx="9"/>'
+    "</clipPath></defs>"
+)
+
+y = HEADER_H
+inner_w = W - 2 * MARGIN
+cols = (inner_w - 2 * CARD_PAD) // TILE_W
+
 for cat in CATEGORIES:
     items = entries.get(cat, [])
     if not items:
         continue
-    cols = min(COLS_WIDE, max(1, (W - 2 * PAD) // TILE))
     rows = -(-len(items) // cols)
-    box_h = BOX_TITLE + rows * TILE_H + PAD
+    card_h = CARD_TITLE_H + rows * TILE_H + CARD_PAD
+    # Card: recessive surface, hairline border
     body.append(
-        f'<rect x="20" y="{y}" width="{W-40}" height="{box_h}" rx="14" '
-        f'fill="{FILL[cat]}" stroke="{STROKE[cat]}" stroke-width="1.5"/>'
+        f'<rect x="{MARGIN}" y="{y}" width="{inner_w}" height="{card_h}" rx="12" '
+        f'fill="{SURFACE}" stroke="{HAIRLINE}" stroke-width="1"/>'
+    )
+    # Category accent chip + title in primary ink, count in muted ink
+    ax = MARGIN + CARD_PAD
+    body.append(
+        f'<rect x="{ax}" y="{y + 22}" width="12" height="12" rx="4" fill="{ACCENT[cat]}"/>'
     )
     body.append(
-        f'<text x="44" y="{y+28}" font-family="Helvetica, Arial, sans-serif" '
-        f'font-size="19" font-weight="bold" fill="{STROKE[cat]}">{esc(cat)}'
-        f'  <tspan font-weight="normal" font-size="14" fill="#667">({len(items)})</tspan></text>'
+        f'<text x="{ax + 22}" y="{y + 33}" font-family="{FONT}" font-size="17" '
+        f'font-weight="600" fill="{INK}">{esc(cat)}'
+        f'<tspan font-weight="400" font-size="13" fill="{MUTED}" dx="8">{len(items)}</tspan></text>'
     )
     for i, (name, org) in enumerate(items):
         r, c = divmod(i, cols)
-        cx = 44 + c * TILE + TILE // 2
-        ty = y + BOX_TITLE + r * TILE_H
+        tx = MARGIN + CARD_PAD + c * TILE_W + (TILE_W - LOGO) // 2
+        ty = y + CARD_TITLE_H + r * TILE_H + 8
         b64 = avatar_b64(org)
+        tile = [f'<g transform="translate({tx},{ty})">']
         if b64:
-            body.append(
-                f'<image x="{cx-ICON//2}" y="{ty+6}" width="{ICON}" height="{ICON}" '
-                f'href="data:image/png;base64,{b64}" clip-path="inset(0 round 10px)"/>'
+            tile.append(
+                f'<image x="0" y="0" width="{LOGO}" height="{LOGO}" '
+                f'clip-path="url(#logoclip)" href="data:image/png;base64,{b64}"/>'
+            )
+            tile.append(
+                f'<rect x="0.5" y="0.5" width="{LOGO - 1}" height="{LOGO - 1}" rx="9" '
+                f'fill="none" stroke="rgba(11,11,11,0.10)" stroke-width="1"/>'
             )
         else:
-            body.append(
-                f'<rect x="{cx-ICON//2}" y="{ty+6}" width="{ICON}" height="{ICON}" rx="10" fill="#ccd"/>'
+            tile.append(
+                f'<rect x="0" y="0" width="{LOGO}" height="{LOGO}" rx="9" '
+                f'fill="{PAGE}" stroke="{HAIRLINE}"/>'
             )
-        label = name if len(name) <= 16 else name[:15] + "…"
-        body.append(
-            f'<text x="{cx}" y="{ty+6+ICON+18}" text-anchor="middle" '
-            f'font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#333">{esc(label)}</text>'
-        )
-    y += box_h + GAP_Y
+        tile.append("</g>")
+        body.extend(tile)
+        cx = tx + LOGO // 2
+        for li, line in enumerate(wrap_label(name)):
+            body.append(
+                f'<text x="{cx}" y="{ty + LOGO + 17 + li * 14}" text-anchor="middle" '
+                f'font-family="{FONT}" font-size="12" fill="{INK2}">{esc(line)}</text>'
+            )
+    y += card_h + CARD_GAP
 
-H = y + 10
-svg.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">')
-svg.append(f'<rect width="{W}" height="{H}" fill="white"/>')
+H = y + MARGIN - CARD_GAP + 24
 svg.append(
-    f'<text x="44" y="40" font-family="Helvetica, Arial, sans-serif" font-size="28" '
-    f'font-weight="bold" fill="#111">The AI Agent Platform Landscape</text>'
+    f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
+    f'viewBox="0 0 {W} {H}" role="img" '
+    f'aria-label="Market map of the AI agent platform landscape">'
 )
+svg.append(defs)
+svg.append(f'<rect width="{W}" height="{H}" fill="{PAGE}"/>')
 total = sum(len(v) for v in entries.values())
 svg.append(
-    f'<text x="44" y="62" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#667">'
-    f'{total} open-source and source-available projects · awesome-ai-agent-platforms</text>'
+    f'<text x="{MARGIN}" y="46" font-family="{FONT}" font-size="26" '
+    f'font-weight="700" fill="{INK}">The AI agent platform landscape</text>'
+)
+svg.append(
+    f'<text x="{MARGIN}" y="72" font-family="{FONT}" font-size="14" fill="{INK2}">'
+    f'{total} open-source and source-available projects, grouped by main use · '
+    f'github.com/Agenta-AI/awesome-ai-agent-platforms</text>'
 )
 svg.extend(body)
 svg.append("</svg>")
