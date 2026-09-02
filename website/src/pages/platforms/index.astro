@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import details from "../../data/platform-details.json";
+const cats = [...new Set(details.map((p) => p.category))];
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "All AI agent platforms",
+  numberOfItems: details.length,
+  itemListElement: details.map((p, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: p.name,
+    url: `https://aiagentplatforms.dev/platforms/${p.slug}/`,
+  })),
+};
+---
+
+<Base
+  title={`All ${details.length} AI agent platforms: features, licenses, and hosting`}
+  description={`Feature pages for ${details.length} open-source and source-available AI agent platforms, each with documented capabilities, exact license, and hosting model.`}
+  path="/platforms/"
+  ld={ld}
+>
+  <h1>All platforms</h1>
+  <p class="muted">
+    One page per platform with documented features, exact license, and hosting model. See the
+    <a href="/">landscape overview</a> for the market map and comparison table.
+  </p>
+  {cats.map((c) => (
+    <section>
+      <h2>{c}</h2>
+      <p>
+        {details.filter((p) => p.category === c).map((p) => (
+          <a class="pill" href={`/platforms/${p.slug}/`}>{p.name}</a>
+        ))}
+      </p>
+    </section>
+  ))}
+</Base>

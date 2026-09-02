@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+import data from "../data/projects.json";
+const total = data.reduce((n, c) => n + c.projects.length, 0);
+
+const faqs = [
+  {
+    q: "What is an AI agent platform?",
+    a: `An AI agent platform is software for creating, running, and managing AI agents: programs that use large language models to complete tasks with tools, memory, and multiple steps. The term covers ready-to-use products you delegate work to, and builder platforms developers use to create custom agents. This site tracks ${total} open-source and source-available options across both.`,
+  },
+  {
+    q: "What is an AI coworker?",
+    a: "An AI coworker is a persistent agent that people delegate real work to. Unlike a chat assistant that answers questions, an AI coworker signs in to your tools, keeps context between sessions, runs tasks on schedules, and comes back with finished work. Major vendors use adjacent names for the same idea, such as AI teammates.",
+  },
+  {
+    q: "What is the difference between an AI agent and an AI coworker?",
+    a: "An AI agent is the general technical term for an LLM-driven program that acts with tools over multiple steps. An AI coworker is an agent packaged for delegation: it is persistent, has access to your applications, and is managed like a team member rather than invoked like a function. Every AI coworker is an agent; not every agent is a coworker.",
+  },
+  {
+    q: "What is the difference between an agent framework and an agent platform?",
+    a: "A framework is a code library developers embed in their own application, such as LangGraph or CrewAI. A platform is a runnable product with its own interface and runtime, such as Dify or Langflow. Frameworks give more control; platforms are faster to start with and often include visual builders, deployment, and monitoring.",
+  },
+  {
+    q: "Which AI agent platforms can I self-host?",
+    a: "Most platforms in this directory can be self-hosted; each entry states its hosting model. Self-hosting means running the software on your own machine or servers, which keeps data and credentials in your infrastructure. Some projects also offer an optional vendor cloud.",
+  },
+  {
+    q: "What does source-available mean, and how is it different from open source?",
+    a: "Open-source licenses such as MIT and Apache 2.0 allow use, modification, and redistribution with few limits. Source-available licenses publish the code but restrict some uses; examples in this list include n8n's Sustainable Use License and the LobeHub Community License. This directory includes both and states the exact license for every project, so you can judge fit for your case.",
+  },
+  {
+    q: "What is a coding agent?",
+    a: "A coding agent is an agent specialized in software work: it reads a codebase, edits files, runs commands and tests, and iterates until a task is done. Examples in this directory include OpenHands, Aider, Cline, Goose, and Open Interpreter. They typically run locally in a terminal or IDE.",
+  },
+  {
+    q: "What is a browser agent?",
+    a: "A browser agent operates a web browser the way a person does: navigating pages, filling forms, and completing tasks on websites that have no API. Browser Use and Skyvern are the browser agents in this directory.",
+  },
+  {
+    q: "How do workflow automation platforms relate to AI agents?",
+    a: "Workflow automation platforms such as n8n, Activepieces, and Windmill run repeatable processes from triggers, schedules, and integrations. Many now include AI steps or embedded agents. The practical difference is predictability: automation platforms execute defined flows, while agents decide their own steps. Many teams combine both.",
+  },
+  {
+    q: "How should I choose between these platforms?",
+    a: "Start from the job. If you want to delegate work without building anything, look at the AI coworkers category. If you are a developer building custom agents, compare agent builders and frameworks. If you need dependable recurring processes, compare workflow automation platforms. Then filter by license, hosting requirements, and the model providers you want to use.",
+  },
+  {
+    q: "How is this directory maintained?",
+    a: "The directory is generated from a curated list on GitHub. Every entry is verified against its official repository, including license and hosting model, and the market map and pages regenerate automatically when the list changes. Anyone can propose an addition or correction through a pull request.",
+  },
+];
+
+const ld = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "AI Agent Platforms", item: "https://aiagentplatforms.dev/" },
+      { "@type": "ListItem", position: 2, name: "FAQ", item: "https://aiagentplatforms.dev/faq/" },
+    ],
+  },
+];
+---
+
+<Base
+  title="AI agent platforms FAQ: coworkers, frameworks, self-hosting, and licenses"
+  description="Plain answers to common questions about AI agent platforms: what AI coworkers are, frameworks versus platforms, self-hosting, open source versus source-available licenses, and how to choose."
+  path="/faq/"
+  ld={ld}
+>
+  <h1>Frequently asked questions</h1>
+  <p class="muted">
+    Plain definitions and practical answers about AI agent platforms, AI coworkers, and the
+    categories used in <a href="/">this directory</a>.
+  </p>
+  {faqs.map((f) => (
+    <details open>
+      <summary>{f.q}</summary>
+      <p>{f.a}</p>
+    </details>
+  ))}
+</Base>

@@ -1,0 +1,78 @@
+---
+import Base from "../../layouts/Base.astro";
+import details from "../../data/platform-details.json";
+
+export function getStaticPaths() {
+  return details.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props;
+const site = "https://aiagentplatforms.dev";
+const path = `/platforms/${p.slug}/`;
+const related = details.filter((r) => r.category === p.category && r.slug !== p.slug).slice(0, 8);
+const title = `${p.name}: features, license, and hosting`;
+const description = `${p.tagline} License: ${p.license}. Hosting: ${p.hosting}. Documented features, verified ${p.verified}.`;
+const ld = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: p.name,
+    description: p.tagline,
+    url: p.website || p.repo,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Cross-platform",
+    license: p.license,
+    sameAs: [p.repo, p.website].filter(Boolean),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "AI Agent Platforms", item: `${site}/` },
+      { "@type": "ListItem", position: 2, name: "All platforms", item: `${site}/platforms/` },
+      { "@type": "ListItem", position: 3, name: p.name, item: `${site}${path}` },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} path={path} ld={ld}>
+  <p class="muted" style="margin-top:24px;">
+    <a href="/">AI Agent Platforms</a> / <a href="/platforms/">All platforms</a> / {p.name}
+  </p>
+  <h1 style="display:flex;align-items:center;gap:12px;">
+    <img src={`https://github.com/${p.org}.png?size=56`} alt="" width="34" height="34" style="border-radius:8px;" />
+    {p.name}
+  </h1>
+  <p>{p.tagline}</p>
+  <p>{p.overview}</p>
+
+  <table class="facts">
+    <tbody>
+      <tr><td>Category</td><td>{p.category}</td></tr>
+      <tr><td>License</td><td>{p.license}</td></tr>
+      <tr><td>Hosting</td><td>{p.hosting}</td></tr>
+      <tr><td>Repository</td><td><a href={p.repo} rel="noopener">{p.repo.replace("https://", "")}</a></td></tr>
+      {p.website && <tr><td>Website</td><td><a href={p.website} rel="noopener">{p.website.replace("https://", "").replace(/\/$/, "")}</a></td></tr>}
+      <tr><td>Last verified</td><td>{p.verified}</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Documented features</h2>
+  <ul class="features">
+    {p.features.map((f) => <li>{f}</li>)}
+  </ul>
+  <p class="muted">
+    Feature summaries come from the project's own repository and documentation and describe the
+    software as documented on the verification date, not an evaluation.
+  </p>
+
+  {related.length > 0 && (
+    <section>
+      <h2>More in {p.category.toLowerCase()}</h2>
+      <p>
+        {related.map((r) => <a class="pill" href={`/platforms/${r.slug}/`}>{r.name}</a>)}
+      </p>
+    </section>
+  )}
+</Base>

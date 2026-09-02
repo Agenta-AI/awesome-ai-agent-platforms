@@ -68,3 +68,16 @@ if (existsSync(banner)) {
 } else {
   console.warn("WARN media/social-preview.png missing; og:image will 404 until CI renders it");
 }
+
+// Sitemap covering all static routes.
+const detailsPath = join(root, "src", "data", "platform-details.json");
+const slugs = existsSync(detailsPath)
+  ? JSON.parse(readFileSync(detailsPath, "utf8")).map((p) => p.slug)
+  : [];
+const urls = ["/", "/faq/", "/platforms/", ...slugs.map((s) => `/platforms/${s}/`)];
+const sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...urls.map((u) => `  <url><loc>https://aiagentplatforms.dev${u}</loc></url>`),
+  "</urlset>", ""].join("\n");
+writeFileSync(join(root, "public", "sitemap.xml"), sitemap);
+console.log(`sitemap.xml: ${urls.length} urls`);

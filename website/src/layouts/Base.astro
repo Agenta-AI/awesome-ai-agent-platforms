@@ -1,0 +1,67 @@
+---
+const { title, description, path = "/", ld = null } = Astro.props;
+const site = "https://aiagentplatforms.dev";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`${site}${path}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f9f9f7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AI Agent Platforms" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${site}${path}`} />
+    <meta property="og:image" content={`${site}/og.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site}/og.png`} />
+    {ld && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
+    <style is:global>
+      :root { --ink: #16181d; --muted: #5c6470; --line: #e4e7ec; --bg: #ffffff; --accent: #3b6fd4; }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
+      main { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
+      a { color: var(--accent); }
+      nav.top { max-width: 880px; margin: 0 auto; padding: 18px 20px 0; font-size: 0.9rem; display: flex; gap: 16px; }
+      nav.top a { text-decoration: none; }
+      h1 { font-size: 1.8rem; margin: 28px 0 8px; }
+      h2 { font-size: 1.25rem; margin-top: 34px; }
+      .muted { color: var(--muted); }
+      .facts { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 0.92rem; }
+      .facts td { border-bottom: 1px solid var(--line); padding: 8px 10px 8px 0; vertical-align: top; }
+      .facts td:first-child { color: var(--muted); width: 130px; }
+      ul.features li { margin: 6px 0; }
+      .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-size: 0.85rem; text-decoration: none; margin: 3px 4px 3px 0; }
+      footer { max-width: 880px; margin: 60px auto 0; padding: 20px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+      details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+      summary { font-weight: 600; cursor: pointer; }
+      details p { color: #333; }
+    </style>
+  </head>
+  <body>
+    <nav class="top">
+      <a href="/">AI Agent Platforms</a>
+      <a href="/platforms/">All platforms</a>
+      <a href="/faq/">FAQ</a>
+      <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">GitHub</a>
+    </nav>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      Maintained alongside the
+      <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
+      repository. License and hosting notes reflect each project's repository at the last verification.
+      Inclusion is not an endorsement. Content is released under CC0 1.0.
+    </footer>
+  </body>
+</html>

@@ -3,6 +3,7 @@ import data from "../data/projects.json";
 const total = data.reduce((n, c) => n + c.projects.length, 0);
 const updated = "2026-09-02";
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const pslug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const site = "https://aiagentplatforms.dev";
 const title = `AI Agent Platforms: ${total} open-source AI coworkers, agent builders, and automation tools`;
 const description = `A maintained directory of ${total} AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting details for each.`;
@@ -25,7 +26,7 @@ const ld = [
       "@type": "ListItem",
       position: i + 1,
       name: p.name,
-      url: p.repo,
+      url: `${site}/platforms/${pslug(p.name)}/`,
     })),
   },
 ];
@@ -100,7 +101,7 @@ const ld = [
         <p class="meta">
           Generated from the
           <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
-          list · updated {updated} · contributions welcome via pull request.
+          list · updated {updated} · <a href="/platforms/">platform pages</a> · <a href="/faq/">FAQ</a> · contributions welcome via pull request.
         </p>
       </header>
 
@@ -122,7 +123,7 @@ const ld = [
               <article class="card">
                 <h3>
                   <img src={`https://github.com/${p.org}.png?size=44`} alt="" loading="lazy" />
-                  <a href={p.repo}>{p.name}</a>
+                  <a href={`/platforms/${pslug(p.name)}/`}>{p.name}</a>
                 </h3>
                 <p>{p.description}</p>
                 <div class="badges">
@@ -146,7 +147,7 @@ const ld = [
             {data.flatMap((c) =>
               c.projects.map((p) => (
                 <tr>
-                  <td><a href={p.repo}>{p.name}</a></td>
+                  <td><a href={`/platforms/${pslug(p.name)}/`}>{p.name}</a></td>
                   <td>{c.name}</td>
                   <td>{p.license}</td>
                   <td>{p.hosting}</td>
