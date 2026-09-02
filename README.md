@@ -4,6 +4,8 @@
 
 AI coworkers are persistent agents that people delegate real work to: they sign in to tools, keep context, run on schedules, and come back with finished work. This list covers the platforms that provide them, the frameworks developers build them with, and the automation and specialist agents around them.
 
+Browse this list as a website with a full comparison table at [aiagentplatforms.dev](https://aiagentplatforms.dev).
+
 ![Market map of the AI agent platform landscape](media/market-map.svg)
 
 ## Contents
