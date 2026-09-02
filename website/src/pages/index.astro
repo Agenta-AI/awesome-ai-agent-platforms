@@ -1,0 +1,127 @@
+---
+import data from "../data/projects.json";
+const total = data.reduce((n, c) => n + c.projects.length, 0);
+const updated = "2026-09-02";
+const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Agent Platforms: the open-source landscape of AI coworkers, agent builders, and automation tools</title>
+    <meta
+      name="description"
+      content={`A maintained directory of ${total} AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting details for each.`}
+    />
+    <style>
+      :root { --ink: #16181d; --muted: #5c6470; --line: #e4e7ec; --bg: #ffffff; --accent: #3b6fd4; }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
+      main { max-width: 1080px; margin: 0 auto; padding: 0 20px 80px; }
+      header.hero { padding: 56px 0 8px; }
+      h1 { font-size: 2rem; margin: 0 0 10px; }
+      .sub { color: var(--muted); max-width: 720px; }
+      .meta { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
+      .map { margin: 28px 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+      .map img { display: block; width: 100%; height: auto; }
+      nav.toc { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
+      nav.toc a { text-decoration: none; color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; font-size: 0.9rem; }
+      section.cat { margin-top: 44px; }
+      section.cat h2 { font-size: 1.35rem; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+      .catdesc { color: var(--muted); max-width: 760px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; margin-top: 18px; }
+      .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+      .card h3 { margin: 0 0 6px; font-size: 1.02rem; display: flex; align-items: center; gap: 9px; }
+      .card img { width: 22px; height: 22px; border-radius: 5px; }
+      .card p { margin: 0 0 10px; font-size: 0.9rem; color: #333; }
+      .badges { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.74rem; }
+      .badge { background: #f2f4f7; border-radius: 5px; padding: 2px 8px; color: #444; }
+      .card a { color: var(--accent); text-decoration: none; }
+      table { border-collapse: collapse; width: 100%; margin-top: 18px; font-size: 0.88rem; }
+      th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+      th { color: var(--muted); font-weight: 600; }
+      footer { margin-top: 60px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 20px; }
+      footer a { color: var(--accent); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <h1>AI Agent Platforms</h1>
+        <p class="sub">
+          A maintained directory of {total} open-source and source-available AI agent platforms.
+          AI coworkers are persistent agents you delegate real work to: they sign in to tools, keep
+          context, run on schedules, and come back with finished work. This site tracks the platforms
+          that provide them, the frameworks developers build them with, and the automation and
+          specialist agents around them, with the license and hosting model for every project.
+        </p>
+        <p class="meta">
+          Generated from the
+          <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
+          list · updated {updated} · contributions welcome via pull request.
+        </p>
+      </header>
+
+      <div class="map">
+        <img src="/market-map.svg" alt={`Market map of ${total} AI agent platforms grouped into five categories`} />
+      </div>
+
+      <nav class="toc">
+        {data.map((c) => <a href={`#${slug(c.name)}`}>{c.name} ({c.projects.length})</a>)}
+        <a href="#comparison">Full comparison table</a>
+      </nav>
+
+      {data.map((c) => (
+        <section class="cat" id={slug(c.name)}>
+          <h2>{c.name}</h2>
+          <p class="catdesc">{c.description}</p>
+          <div class="grid">
+            {c.projects.map((p) => (
+              <article class="card">
+                <h3>
+                  <img src={`https://github.com/${p.org}.png?size=44`} alt="" loading="lazy" />
+                  <a href={p.repo}>{p.name}</a>
+                </h3>
+                <p>{p.description}</p>
+                <div class="badges">
+                  <span class="badge">{p.license}</span>
+                  <span class="badge">{p.hosting}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <section class="cat" id="comparison">
+        <h2>Full comparison</h2>
+        <p class="catdesc">Every listed project with its category, license, and hosting model.</p>
+        <table>
+          <thead>
+            <tr><th>Project</th><th>Category</th><th>License</th><th>Hosting</th></tr>
+          </thead>
+          <tbody>
+            {data.flatMap((c) =>
+              c.projects.map((p) => (
+                <tr>
+                  <td><a href={p.repo}>{p.name}</a></td>
+                  <td>{c.name}</td>
+                  <td>{p.license}</td>
+                  <td>{p.hosting}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </section>
+
+      <footer>
+        Maintained alongside the
+        <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
+        repository. License and hosting notes reflect each linked repository at the time of the last
+        verification. Inclusion is not an endorsement. Site content is released under CC0 1.0.
+      </footer>
+    </main>
+  </body>
+</html>

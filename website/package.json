@@ -1,0 +1,16 @@
+{
+  "name": "ai-agent-platforms-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/generate-data.mjs && cp ../media/market-map.svg public/market-map.svg || true",
+    "prebuild": "node scripts/generate-data.mjs && cp ../media/market-map.svg public/market-map.svg || true",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  }
+}
