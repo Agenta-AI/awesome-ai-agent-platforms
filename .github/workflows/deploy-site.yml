@@ -18,8 +18,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install SVG renderer
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin
       - name: Generate fresh market map
         run: python3 scripts/market_map.py README.md media/market-map.svg
+      - name: Render favicon fallbacks
+        run: |
+          rsvg-convert -w 32 -h 32 website/public/favicon.svg -o website/public/favicon-32.png
+          rsvg-convert -w 180 -h 180 website/public/favicon.svg -o website/public/apple-touch-icon.png
       - name: Build site
         working-directory: website
         run: |

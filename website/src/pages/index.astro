@@ -3,17 +3,58 @@ import data from "../data/projects.json";
 const total = data.reduce((n, c) => n + c.projects.length, 0);
 const updated = "2026-09-02";
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const site = "https://aiagentplatforms.dev";
+const title = `AI Agent Platforms: ${total} open-source AI coworkers, agent builders, and automation tools`;
+const description = `A maintained directory of ${total} AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting details for each.`;
+const ld = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "AI Agent Platforms",
+    url: site,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "AI agent platforms directory",
+    description,
+    url: site,
+    numberOfItems: total,
+    itemListElement: data.flatMap((c) => c.projects).map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.name,
+      url: p.repo,
+    })),
+  },
+];
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI Agent Platforms: the open-source landscape of AI coworkers, agent builders, and automation tools</title>
-    <meta
-      name="description"
-      content={`A maintained directory of ${total} AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting details for each.`}
-    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`${site}/`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f9f9f7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AI Agent Platforms" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${site}/`} />
+    <meta property="og:image" content={`${site}/og.png`} />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site}/og.png`} />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
     <style>
       :root { --ink: #16181d; --muted: #5c6470; --line: #e4e7ec; --bg: #ffffff; --accent: #3b6fd4; }
       * { box-sizing: border-box; }

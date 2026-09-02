@@ -59,3 +59,12 @@ if (existsSync(map)) {
 } else {
   console.warn("WARN media/market-map.svg missing; run scripts/market_map.py first");
 }
+
+// Social preview doubles as the Open Graph image.
+const banner = join(root, "..", "media", "social-preview.png");
+if (existsSync(banner)) {
+  copyFileSync(banner, join(root, "public", "og.png"));
+  console.log("copied og.png");
+} else {
+  console.warn("WARN media/social-preview.png missing; og:image will 404 until CI renders it");
+}
