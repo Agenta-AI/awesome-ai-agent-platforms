@@ -13,6 +13,12 @@ import tempfile
 import urllib.request
 from pathlib import Path
 
+try:
+    from tile_contrast import needs_dark_tile
+except ImportError:
+    def needs_dark_tile(path):
+        return False
+
 README = Path(sys.argv[1])
 OUT = Path(sys.argv[2])
 CACHE = Path(tempfile.gettempdir()) / "market-map-avatars"
@@ -134,6 +140,10 @@ for cat in CATEGORIES:
         b64 = avatar_b64(org)
         tile = [f'<g transform="translate({tx},{ty})">']
         if b64:
+            tile_bg = "#16181d" if needs_dark_tile(CACHE / f"{org}.png") else "#ffffff"
+            tile.append(
+                f'<rect x="0" y="0" width="{LOGO}" height="{LOGO}" rx="9" fill="{tile_bg}"/>'
+            )
             tile.append(
                 f'<image x="0" y="0" width="{LOGO}" height="{LOGO}" '
                 f'clip-path="url(#logoclip)" href="data:image/png;base64,{b64}"/>'
