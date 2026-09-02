@@ -48,6 +48,12 @@ for line in text.splitlines():
         if e:
             entries[current].append(e.group(2))
 
+
+def data_uri(raw):
+    mime = "image/jpeg" if raw[:3] == b"\xff\xd8\xff" else "image/png"
+    import base64 as _b64
+    return f"data:{mime};base64,{_b64.b64encode(raw).decode()}"
+
 def avatar_b64(org):
     p = CACHE / f"{org}.png"
     if not p.exists():
@@ -58,7 +64,7 @@ def avatar_b64(org):
                 p.write_bytes(r.read())
         except Exception:
             return None
-    return base64.b64encode(p.read_bytes()).decode()
+    return data_uri(p.read_bytes())
 
 total = sum(len(v) for v in entries.values())
 
@@ -128,7 +134,7 @@ for i, org in enumerate(picked):
         f'<g transform="translate({lx},{ly})">'
         f'<rect x="0" y="0" width="64" height="64" rx="12" fill="{tile_bg}"/>'
         f'<image x="0" y="0" width="64" height="64" clip-path="url(#lc)" '
-        f'href="data:image/png;base64,{b64}"/>'
+        f'href="{b64}"/>'
         f'<rect x="0.5" y="0.5" width="63" height="63" rx="12" fill="none" '
         f'stroke="rgba(11,11,11,0.10)"/></g>'
     )

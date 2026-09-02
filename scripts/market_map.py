@@ -47,6 +47,12 @@ for line in text.splitlines():
         if e:
             entries[current].append((e.group(1), e.group(2)))
 
+
+def data_uri(raw):
+    mime = "image/jpeg" if raw[:3] == b"\xff\xd8\xff" else "image/png"
+    import base64 as _b64
+    return f"data:{mime};base64,{_b64.b64encode(raw).decode()}"
+
 def avatar_b64(org):
     p = CACHE / f"{org}.png"
     if not p.exists():
@@ -58,7 +64,7 @@ def avatar_b64(org):
         except Exception as ex:
             print(f"WARN no avatar for {org}: {ex}", file=sys.stderr)
             return None
-    return base64.b64encode(p.read_bytes()).decode()
+    return data_uri(p.read_bytes())
 
 # Design tokens (validated reference dataviz palette).
 # Color is an accent on each category header, in fixed slot order; text stays
@@ -146,7 +152,7 @@ for cat in CATEGORIES:
             )
             tile.append(
                 f'<image x="0" y="0" width="{LOGO}" height="{LOGO}" '
-                f'clip-path="url(#logoclip)" href="data:image/png;base64,{b64}"/>'
+                f'clip-path="url(#logoclip)" href="{b64}"/>'
             )
             tile.append(
                 f'<rect x="0.5" y="0.5" width="{LOGO - 1}" height="{LOGO - 1}" rx="9" '
