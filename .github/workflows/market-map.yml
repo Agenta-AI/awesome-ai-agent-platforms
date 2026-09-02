@@ -7,6 +7,7 @@ on:
       - README.md
       - scripts/market_map.py
       - scripts/social_preview.py
+      - scripts/tile_contrast.py
   workflow_dispatch:
 
 permissions:
@@ -17,8 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install SVG renderer
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin fonts-dejavu-core
+      - name: Install renderer and Pillow
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin fonts-dejavu-core
+          python3 -m pip install --quiet pillow
       - name: Generate market map
         run: python3 scripts/market_map.py README.md media/market-map.svg
       - name: Generate social preview
