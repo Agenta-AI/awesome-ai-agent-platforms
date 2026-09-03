@@ -131,3 +131,4 @@ for name, count, color, blurb in CATS:
     cy += row_h
 (OUT / "categories.svg").write_text("\n".join(s))
 print("OK media/categories.svg")
+# trigger: render article images
