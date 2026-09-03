@@ -129,6 +129,6 @@ for name, count, color, blurb in CATS:
     s.append(f'<text x="92" y="{cy+76}" font-family="{FONT}" font-size="23" fill="{INK2}">{esc(blurb)}</text>')
     s.append(f'<text x="{W2-92}" y="{cy+52}" text-anchor="end" font-family="{FONT}" font-size="40" font-weight="bold" fill="{color}">{count}</text>')
     cy += row_h
+s.append("</svg>")
 (OUT / "categories.svg").write_text("\n".join(s))
 print("OK media/categories.svg")
-# trigger: render article images
