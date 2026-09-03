@@ -37,9 +37,10 @@ CATS = [
 ]
 TOTAL = sum(c[1] for c in CATS)
 # Representative orgs across categories for the cover logo strip.
+# Six recognizable brand logos (avoid personal-photo avatars), one per lane where possible.
 COVER_ORGS = [
-    "danny-avila", "langchain-ai", "langgenius", "n8n-io",
-    "browser-use", "All-Hands-AI", "crewAIInc", "Skyvern-AI",
+    "langchain-ai", "langgenius", "n8n-io",
+    "browser-use", "All-Hands-AI", "Skyvern-AI",
 ]
 
 
@@ -92,8 +93,8 @@ s.append(f'<text x="72" y="400" font-family="{FONT}" font-size="30" fill="{INK2}
 # category dots row
 x = 74
 for name, _, color, _ in CATS:
-    s.append(f'<circle cx="{x+9}" cy="470" r="9" fill="{color}"/>')
-    s.append(f'<text x="{x+28}" y="478" font-family="{FONT}" font-size="24" fill="{INK}">{esc(name)}</text>')
+    s.append(f'<circle cx="{x+9}" cy="492" r="9" fill="{color}"/>')
+    s.append(f'<text x="{x+28}" y="500" font-family="{FONT}" font-size="24" fill="{INK}">{esc(name)}</text>')
     x += 28 + len(name) * 13 + 34
 s.append(f'<text x="72" y="612" font-family="{FONT}" font-size="26" font-weight="bold" fill="{INK2}">aiagentplatforms.dev</text>')
 # Right logo panel: 2 cols x 4 rows of 84px tiles
