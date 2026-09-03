@@ -44,10 +44,11 @@ const ld = [
     {Object.entries(catMeta).map(([name, m]) => {
       const count = data.find((c) => c.name === name)?.projects.length ?? 0;
       return (
-        <a class="cat-card" href={`/categories/${m.slug}/`}>
-          <span class="dot" style={`background:${m.color}`}></span>
-          <span class="cc-name">{name}</span>
-          <span class="cc-count">{count}</span>
+        <a class="cat-card" href={`/categories/${m.slug}/`} style={`--cat:${m.color}`}>
+          <span class="cc-head">
+            <span class="cc-name">{name}</span>
+            <span class="cc-count">{count}</span>
+          </span>
           <span class="cc-blurb">{m.blurb}</span>
         </a>
       );
@@ -113,17 +114,18 @@ const ld = [
     .hero { padding: 40px 0 8px; max-width: 760px; }
     .hero h1 { font-size: 2.4rem; }
 
-    .cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+    .cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 28px 0 8px; align-items: stretch; }
     .cat-card {
-      display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "dot name count" "blurb blurb blurb";
-      gap: 4px 9px; align-items: center; padding: 14px 16px; border: 1px solid var(--line);
-      border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink);
+      display: flex; flex-direction: column; gap: 6px; padding: 14px 16px 15px;
+      border: 1px solid var(--line); border-left: 3px solid var(--cat); border-radius: 12px;
+      background: var(--surface); box-shadow: var(--shadow); color: var(--ink);
     }
-    .cat-card:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-1px); transition: .12s; }
-    .dot { width: 10px; height: 10px; border-radius: 3px; grid-area: dot; }
-    .cc-name { grid-area: name; font-weight: 600; font-size: 0.95rem; }
-    .cc-count { grid-area: count; color: var(--muted); font-size: 0.85rem; }
-    .cc-blurb { grid-area: blurb; color: var(--ink-2); font-size: 0.85rem; }
+    .cat-card:hover { text-decoration: none; border-color: var(--accent); border-left-color: var(--cat); transform: translateY(-1px); transition: .12s; }
+    .cc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .cc-name { font-weight: 600; font-size: 0.95rem; }
+    .cc-count { color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+    .cc-blurb { color: var(--ink-2); font-size: 0.85rem; }
+    .dot { width: 10px; height: 10px; border-radius: 3px; flex: none; }
 
     .map { margin: 28px 0 8px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
     .map img { display: block; width: 100%; height: auto; }
@@ -132,6 +134,7 @@ const ld = [
     .cat-section { margin-top: 48px; scroll-margin-top: 72px; }
     .sec-head { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
     .sec-head h2 { margin: 0; font-size: 1.3rem; }
+    .sec-head .muted { margin-left: auto; font-variant-numeric: tabular-nums; }
     .sec-head h2 a { color: var(--ink); }
     .sec-head h2 a:hover { color: var(--accent); }
     .catdesc { margin: 12px 0 0; max-width: 70ch; }
