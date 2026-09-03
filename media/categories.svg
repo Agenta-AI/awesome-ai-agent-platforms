@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+<rect width="1200" height="760" fill="#f9f9f7"/>
+<text x="56" y="80" font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="bold" fill="#16181d">Five categories, 49 platforms</text>
+<text x="56" y="120" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#52514e">Grouped by the job each tool does.</text>
+<rect x="56" y="168" width="1088" height="92" rx="16" fill="#ffffff" stroke="#e6e5df"/>
+<rect x="56" y="168" width="8" height="92" rx="4" fill="#2a78d6"/>
+<text x="92" y="210" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#16181d">AI coworkers</text>
+<text x="92" y="244" font-family="Helvetica, Arial, sans-serif" font-size="23" fill="#52514e">Persistent agents you delegate real work to.</text>
+<text x="1108" y="220" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="#2a78d6">12</text>
+<rect x="56" y="276" width="1088" height="92" rx="16" fill="#ffffff" stroke="#e6e5df"/>
+<rect x="56" y="276" width="8" height="92" rx="4" fill="#1baf7a"/>
+<text x="92" y="318" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#16181d">Agent builders</text>
+<text x="92" y="352" font-family="Helvetica, Arial, sans-serif" font-size="23" fill="#52514e">Frameworks and visual tools to build agents.</text>
+<text x="1108" y="328" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="#1baf7a">16</text>
+<rect x="56" y="384" width="1088" height="92" rx="16" fill="#ffffff" stroke="#e6e5df"/>
+<rect x="56" y="384" width="8" height="92" rx="4" fill="#eda100"/>
+<text x="92" y="426" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#16181d">Workflow automation</text>
+<text x="92" y="460" font-family="Helvetica, Arial, sans-serif" font-size="23" fill="#52514e">Repeatable processes with AI steps.</text>
+<text x="1108" y="436" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="#eda100">14</text>
+<rect x="56" y="492" width="1088" height="92" rx="16" fill="#ffffff" stroke="#e6e5df"/>
+<rect x="56" y="492" width="8" height="92" rx="4" fill="#008300"/>
+<text x="92" y="534" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#16181d">Browser agents</text>
+<text x="92" y="568" font-family="Helvetica, Arial, sans-serif" font-size="23" fill="#52514e">Agents that operate a web browser.</text>
+<text x="1108" y="544" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="#008300">2</text>
+<rect x="56" y="600" width="1088" height="92" rx="16" fill="#ffffff" stroke="#e6e5df"/>
+<rect x="56" y="600" width="8" height="92" rx="4" fill="#4a3aa7"/>
+<text x="92" y="642" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#16181d">Coding agents</text>
+<text x="92" y="676" font-family="Helvetica, Arial, sans-serif" font-size="23" fill="#52514e">Agents that read, edit, and ship code.</text>
+<text x="1108" y="652" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="#4a3aa7">5</text>
+</svg>
