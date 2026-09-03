@@ -32,9 +32,9 @@ jobs:
       - name: Generate article images
         run: |
           python3 scripts/article_images.py
-          rsvg-convert -w 1600 -h 680 media/article-cover.svg -o media/article-cover.png
-          rsvg-convert -w 1200 -h 760 media/categories.svg -o media/categories.png
-          rsvg-convert -w 1440 media/market-map.svg -o media/market-map.png
+          rsvg-convert -w 3200 -h 1360 media/article-cover.svg -o media/article-cover.png
+          rsvg-convert -w 2400 -h 1520 media/categories.svg -o media/categories.png
+          rsvg-convert -w 2880 media/market-map.svg -o media/market-map.png
       - name: Commit if changed
         run: |
           if [ -n "$(git status --porcelain media)" ]; then
