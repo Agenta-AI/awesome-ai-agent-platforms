@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import details from "../data/platform-details.json";
+const total = details.length;
+const site = "https://aiagentplatforms.dev";
+const path = "/updates/";
+
+// Newest first. Add an entry when the list or site changes materially.
+const entries = [
+  {
+    date: "2026-09-03",
+    items: [
+      "Added five category pages, a how-to-choose guide, and per-platform feature pages.",
+      "Redesigned the site with a shared header, footer navigation, and dark mode.",
+      "Sitemap now includes a last-modified date for every page.",
+    ],
+  },
+  {
+    date: "2026-09-02",
+    items: [
+      `Published the directory with ${total} verified platforms across five categories.`,
+      "Added the market map image, generated automatically from the list.",
+    ],
+  },
+];
+
+const title = "Updates and changelog";
+const description = "Recent changes to the AI Agent Platforms directory: new platforms, new pages, and site improvements, with dates.";
+const ld = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "AI Agent Platforms", item: `${site}/` },
+    { "@type": "ListItem", position: 2, name: "Updates", item: `${site}${path}` },
+  ],
+};
+const fmt = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+---
+
+<Base title={title} description={description} path={path} ld={ld}>
+  <p class="crumb"><a href="/">AI Agent Platforms</a> / Updates</p>
+  <h1>Updates</h1>
+  <p class="lead">What has changed in this directory, newest first.</p>
+
+  {entries.map((e) => (
+    <section class="entry">
+      <h2>{fmt(e.date)}</h2>
+      <ul class="features">
+        {e.items.map((i) => <li>{i}</li>)}
+      </ul>
+    </section>
+  ))}
+
+  <p class="muted" style="margin-top:32px;">
+    Changes come from the <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms" rel="noopener">source repository</a>.
+    To propose a platform or a correction, open a pull request.
+  </p>
+</Base>

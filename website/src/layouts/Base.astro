@@ -1,6 +1,19 @@
 ---
-const { title, description, path = "/", ld = null } = Astro.props;
+const { title, description, path = "/", ld = null, wide = false } = Astro.props;
 const site = "https://aiagentplatforms.dev";
+const nav = [
+  { href: "/platforms/", label: "Platforms" },
+  { href: "/how-to-choose/", label: "How to choose" },
+  { href: "/faq/", label: "FAQ" },
+];
+const cats = [
+  { href: "/categories/ai-coworkers/", label: "AI coworkers" },
+  { href: "/categories/agent-builders/", label: "Agent builders" },
+  { href: "/categories/workflow-automation/", label: "Workflow automation" },
+  { href: "/categories/browser-agents/", label: "Browser agents" },
+  { href: "/categories/coding-agents/", label: "Coding agents" },
+];
+const here = (h) => path === h;
 ---
 
 <html lang="en">
@@ -13,7 +26,9 @@ const site = "https://aiagentplatforms.dev";
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#f9f9f7" />
+    <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)" />
+    <link rel="preconnect" href="https://avatars.githubusercontent.com" crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AI Agent Platforms" />
     <meta property="og:title" content={title} />
@@ -26,43 +41,159 @@ const site = "https://aiagentplatforms.dev";
     <meta name="twitter:image" content={`${site}/og.png`} />
     {ld && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
     <style is:global>
-      :root { --ink: #16181d; --muted: #5c6470; --line: #e4e7ec; --bg: #ffffff; --accent: #3b6fd4; }
+      :root {
+        --page: #f9f9f7; --surface: #ffffff; --surface-2: #fcfcfb;
+        --ink: #16181d; --ink-2: #52514e; --muted: #898781;
+        --line: #e6e5df; --line-2: #eeede8;
+        --accent: #2a78d6; --accent-ink: #1c5cab;
+        --c1: #2a78d6; --c2: #1baf7a; --c3: #eda100; --c4: #008300; --c5: #4a3aa7;
+        --shadow: 0 1px 2px rgba(16,24,40,.04), 0 1px 3px rgba(16,24,40,.06);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --page: #0d0d0d; --surface: #1a1a19; --surface-2: #16181d;
+          --ink: #ffffff; --ink-2: #c3c2b7; --muted: #8f8d86;
+          --line: #2c2c2a; --line-2: #232322;
+          --accent: #3987e5; --accent-ink: #6da7ec;
+          --c1: #3987e5; --c2: #199e70; --c3: #c98500; --c4: #2f9e5f; --c5: #9085e9;
+          --shadow: none;
+        }
+      }
       * { box-sizing: border-box; }
-      body { margin: 0; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
-      main { max-width: 880px; margin: 0 auto; padding: 0 20px 80px; }
-      a { color: var(--accent); }
-      nav.top { max-width: 880px; margin: 0 auto; padding: 18px 20px 0; font-size: 0.9rem; display: flex; gap: 16px; }
-      nav.top a { text-decoration: none; }
-      h1 { font-size: 1.8rem; margin: 28px 0 8px; }
-      h2 { font-size: 1.25rem; margin-top: 34px; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0; background: var(--page); color: var(--ink);
+        font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6; -webkit-font-smoothing: antialiased;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+      .wrap.wide { max-width: 1120px; }
+
+      /* Header */
+      .site-header {
+        position: sticky; top: 0; z-index: 20;
+        background: color-mix(in srgb, var(--page) 88%, transparent);
+        backdrop-filter: saturate(1.4) blur(8px);
+        border-bottom: 1px solid var(--line);
+      }
+      .site-header .bar { display: flex; align-items: center; gap: 20px; height: 58px; }
+      .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; color: var(--ink); font-size: 1rem; }
+      .brand:hover { text-decoration: none; }
+      .brand svg { display: block; border-radius: 7px; }
+      .nav { display: flex; gap: 4px; margin-left: auto; align-items: center; }
+      .nav a { color: var(--ink-2); padding: 7px 12px; border-radius: 8px; font-size: 0.92rem; }
+      .nav a:hover { color: var(--ink); background: var(--line-2); text-decoration: none; }
+      .nav a[aria-current="page"] { color: var(--ink); background: var(--line-2); }
+      .nav .gh {
+        display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line);
+        background: var(--surface); color: var(--ink); font-weight: 550;
+      }
+      .nav .gh:hover { background: var(--surface-2); }
+      .menu-toggle { display: none; }
+      @media (max-width: 720px) {
+        .nav a:not(.gh) { display: none; }
+        .nav { gap: 8px; }
+      }
+
+      /* Footer */
+      .site-footer { border-top: 1px solid var(--line); margin-top: 72px; background: var(--surface-2); }
+      .site-footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; padding: 40px 0 28px; }
+      .site-footer h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 12px; }
+      .site-footer ul { list-style: none; margin: 0; padding: 0; }
+      .site-footer li { margin: 7px 0; }
+      .site-footer a { color: var(--ink-2); font-size: 0.92rem; }
+      .site-footer a:hover { color: var(--ink); }
+      .site-footer .about { color: var(--ink-2); font-size: 0.9rem; max-width: 30ch; }
+      .site-footer .legal { border-top: 1px solid var(--line); padding: 16px 0; color: var(--muted); font-size: 0.84rem; }
+      @media (max-width: 720px) { .site-footer .cols { grid-template-columns: 1fr 1fr; gap: 24px; } }
+
+      /* Shared content bits */
+      h1 { font-size: 2rem; line-height: 1.2; margin: 8px 0 12px; letter-spacing: -0.01em; }
+      h2 { font-size: 1.3rem; margin: 40px 0 10px; letter-spacing: -0.01em; }
       .muted { color: var(--muted); }
-      .facts { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 0.92rem; }
-      .facts td { border-bottom: 1px solid var(--line); padding: 8px 10px 8px 0; vertical-align: top; }
+      .lead { color: var(--ink-2); font-size: 1.05rem; }
+      .crumb { color: var(--muted); font-size: 0.88rem; margin: 22px 0 0; }
+      .crumb a { color: var(--muted); }
+      .facts { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 0.93rem; }
+      .facts td { border-bottom: 1px solid var(--line-2); padding: 9px 10px 9px 0; vertical-align: top; }
       .facts td:first-child { color: var(--muted); width: 130px; }
-      ul.features li { margin: 6px 0; }
-      .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-size: 0.85rem; text-decoration: none; margin: 3px 4px 3px 0; }
-      footer { max-width: 880px; margin: 60px auto 0; padding: 20px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
-      details { border-bottom: 1px solid var(--line); padding: 12px 0; }
-      summary { font-weight: 600; cursor: pointer; }
-      details p { color: #333; }
+      ul.features { padding-left: 20px; }
+      ul.features li { margin: 7px 0; }
+      .pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 4px 13px; font-size: 0.86rem; margin: 4px 5px 4px 0; color: var(--ink-2); }
+      .pill:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+      details { border-bottom: 1px solid var(--line-2); padding: 14px 0; }
+      summary { font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+      summary::-webkit-details-marker { display: none; }
+      summary::after { content: "+"; color: var(--muted); font-weight: 400; }
+      details[open] summary::after { content: "\2013"; }
+      details p { color: var(--ink-2); margin: 10px 0 2px; }
+      .badges { display: flex; flex-wrap: wrap; gap: 6px; }
+      .badge { background: var(--line-2); border-radius: 6px; padding: 2px 9px; font-size: 0.74rem; color: var(--ink-2); }
     </style>
   </head>
   <body>
-    <nav class="top">
-      <a href="/">AI Agent Platforms</a>
-      <a href="/platforms/">All platforms</a>
-      <a href="/how-to-choose/">How to choose</a>
-      <a href="/faq/">FAQ</a>
-      <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">GitHub</a>
-    </nav>
-    <main>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="/">
+          <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#16181d" />
+            <rect x="12" y="12" width="18" height="18" rx="5" fill="#2a78d6" />
+            <rect x="34" y="12" width="18" height="18" rx="5" fill="#1baf7a" />
+            <rect x="12" y="34" width="18" height="18" rx="5" fill="#eda100" />
+            <rect x="34" y="34" width="18" height="18" rx="5" fill="#4a3aa7" />
+          </svg>
+          AI Agent Platforms
+        </a>
+        <nav class="nav" aria-label="Primary">
+          {nav.map((n) => <a href={n.href} aria-current={here(n.href) ? "page" : undefined}>{n.label}</a>)}
+          <a class="gh" href="https://github.com/Agenta-AI/awesome-ai-agent-platforms" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Star
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class={wide ? "wrap wide" : "wrap"}>
       <slot />
     </main>
-    <footer>
-      Maintained alongside the
-      <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
-      repository. License and hosting notes reflect each project's repository at the last verification.
-      Inclusion is not an endorsement. Content is released under CC0 1.0.
+
+    <footer class="site-footer">
+      <div class="wrap cols">
+        <div>
+          <h4>AI Agent Platforms</h4>
+          <p class="about">A maintained, open directory of open-source and source-available AI agent platforms, with license and hosting notes for each.</p>
+        </div>
+        <div>
+          <h4>Categories</h4>
+          <ul>
+            {cats.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/platforms/">All platforms</a></li>
+            <li><a href="/how-to-choose/">How to choose</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/updates/">Updates</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Project</h4>
+          <ul>
+            <li><a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms" rel="noopener">GitHub repository</a></li>
+            <li><a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms#contributing" rel="noopener">Contribute</a></li>
+            <li><a href="/sitemap.xml">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap legal">
+        Content released under CC0 1.0. Inclusion is not an endorsement. License and hosting notes
+        reflect each project's repository at the last verification.
+      </div>
     </footer>
   </body>
 </html>

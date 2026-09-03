@@ -89,6 +89,7 @@ const urls = [
   "/",
   "/faq/",
   "/how-to-choose/",
+  "/updates/",
   "/platforms/",
   ...catRoutes,
   ...slugs.map((s) => `/platforms/${s}/`),

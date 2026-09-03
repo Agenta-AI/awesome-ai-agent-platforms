@@ -1,170 +1,155 @@
 ---
+import Base from "../layouts/Base.astro";
 import data from "../data/projects.json";
 const total = data.reduce((n, c) => n + c.projects.length, 0);
-const updated = "2026-09-02";
+const updated = "September 3, 2026";
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pslug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const catSlug = {"AI coworkers and teammates": "ai-coworkers", "Agent builders and frameworks": "agent-builders", "Workflow automation platforms": "workflow-automation", "Browser agents": "browser-agents", "Coding agents": "coding-agents"};
 const site = "https://aiagentplatforms.dev";
+
+const catMeta = {
+  "AI coworkers and teammates": { slug: "ai-coworkers", color: "var(--c1)", blurb: "Persistent agents you delegate real work to." },
+  "Agent builders and frameworks": { slug: "agent-builders", color: "var(--c2)", blurb: "Tools developers use to build custom agents." },
+  "Workflow automation platforms": { slug: "workflow-automation", color: "var(--c3)", blurb: "Run repeatable processes with AI steps." },
+  "Browser agents": { slug: "browser-agents", color: "var(--c4)", blurb: "Agents that operate web browsers." },
+  "Coding agents": { slug: "coding-agents", color: "var(--c5)", blurb: "Agents that read, edit, and ship code." },
+};
+
 const title = `AI Agent Platforms: ${total} open-source AI coworkers, agent builders, and automation tools`;
 const description = `A maintained directory of ${total} AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting details for each.`;
 const ld = [
+  { "@context": "https://schema.org", "@type": "WebSite", name: "AI Agent Platforms", url: site, description },
   {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "AI Agent Platforms",
-    url: site,
-    description,
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "AI agent platforms directory",
-    description,
-    url: site,
-    numberOfItems: total,
+    "@context": "https://schema.org", "@type": "ItemList", name: "AI agent platforms directory",
+    description, url: site, numberOfItems: total,
     itemListElement: data.flatMap((c) => c.projects).map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: p.name,
-      url: `${site}/platforms/${pslug(p.name)}/`,
+      "@type": "ListItem", position: i + 1, name: p.name, url: `${site}/platforms/${pslug(p.name)}/`,
     })),
   },
 ];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={`${site}/`} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#f9f9f7" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="AI Agent Platforms" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={`${site}/`} />
-    <meta property="og:image" content={`${site}/og.png`} />
-    <meta property="og:image:width" content="1280" />
-    <meta property="og:image:height" content="640" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${site}/og.png`} />
-    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
-    <style>
-      :root { --ink: #16181d; --muted: #5c6470; --line: #e4e7ec; --bg: #ffffff; --accent: #3b6fd4; }
-      * { box-sizing: border-box; }
-      body { margin: 0; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
-      main { max-width: 1080px; margin: 0 auto; padding: 0 20px 80px; }
-      header.hero { padding: 56px 0 8px; }
-      h1 { font-size: 2rem; margin: 0 0 10px; }
-      .sub { color: var(--muted); max-width: 720px; }
-      .meta { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
-      .map { margin: 28px 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-      .map img { display: block; width: 100%; height: auto; }
-      nav.toc { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
-      nav.toc a { text-decoration: none; color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; font-size: 0.9rem; }
-      section.cat { margin-top: 44px; }
-      section.cat h2 { font-size: 1.35rem; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
-      .catdesc { color: var(--muted); max-width: 760px; }
-      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; margin-top: 18px; }
-      .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
-      .card h3 { margin: 0 0 6px; font-size: 1.02rem; display: flex; align-items: center; gap: 9px; }
-      .card img { width: 22px; height: 22px; border-radius: 5px; }
-      .card p { margin: 0 0 10px; font-size: 0.9rem; color: #333; }
-      .badges { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.74rem; }
-      .badge { background: #f2f4f7; border-radius: 5px; padding: 2px 8px; color: #444; }
-      .card a { color: var(--accent); text-decoration: none; }
-      table { border-collapse: collapse; width: 100%; margin-top: 18px; font-size: 0.88rem; }
-      th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
-      th { color: var(--muted); font-weight: 600; }
-      footer { margin-top: 60px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); padding-top: 20px; }
-      footer a { color: var(--accent); }
-    </style>
-  </head>
-  <body>
-    <main>
-      <header class="hero">
-        <h1>AI Agent Platforms</h1>
-        <p class="sub">
-          A maintained directory of {total} open-source and source-available AI agent platforms.
-          AI coworkers are persistent agents you delegate real work to: they sign in to tools, keep
-          context, run on schedules, and come back with finished work. This site tracks the platforms
-          that provide them, the frameworks developers build them with, and the automation and
-          specialist agents around them, with the license and hosting model for every project.
-        </p>
-        <p class="meta">
-          Generated from the
-          <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
-          list · updated {updated} · <a href="/platforms/">platform pages</a> · <a href="/how-to-choose/">how to choose</a> · <a href="/faq/">FAQ</a> · contributions welcome via pull request.
-        </p>
-      </header>
+<Base title={title} description={description} path="/" ld={ld} wide={true}>
+  <section class="hero">
+    <h1>The open-source AI agent platform landscape</h1>
+    <p class="lead">
+      A maintained directory of {total} AI agent platforms: AI coworkers you delegate work to, the
+      frameworks developers build agents with, workflow automation, browser agents, and coding agents.
+      Every entry lists its exact license and hosting model.
+    </p>
+    <p class="muted small">Updated {updated} · <a href="/how-to-choose/">How to choose</a> · <a href="/faq/">FAQ</a></p>
+  </section>
 
-      <div class="map">
-        <img src="/market-map.svg" alt={`Market map of ${total} AI agent platforms grouped into five categories`} />
+  <nav class="cats" aria-label="Categories">
+    {Object.entries(catMeta).map(([name, m]) => {
+      const count = data.find((c) => c.name === name)?.projects.length ?? 0;
+      return (
+        <a class="cat-card" href={`/categories/${m.slug}/`}>
+          <span class="dot" style={`background:${m.color}`}></span>
+          <span class="cc-name">{name}</span>
+          <span class="cc-count">{count}</span>
+          <span class="cc-blurb">{m.blurb}</span>
+        </a>
+      );
+    })}
+  </nav>
+
+  <figure class="map">
+    <img src="/market-map.svg" width="1440" height="1456"
+      alt={`Market map of ${total} AI agent platforms grouped into five categories`} />
+    <figcaption class="muted small">The {total} platforms, grouped by main use. Full detail below.</figcaption>
+  </figure>
+
+  {data.map((c) => (
+    <section class="cat-section" id={slug(c.name)}>
+      <div class="sec-head">
+        <span class="dot" style={`background:${catMeta[c.name]?.color}`}></span>
+        <h2><a href={`/categories/${catMeta[c.name]?.slug}/`}>{c.name}</a></h2>
+        <span class="muted small">{c.projects.length}</span>
       </div>
+      <p class="catdesc muted">{c.description}</p>
+      <div class="grid">
+        {c.projects.map((p) => (
+          <a class="card" href={`/platforms/${pslug(p.name)}/`}>
+            <div class="card-top">
+              <img src={`https://github.com/${p.org}.png?size=48`} alt="" loading="lazy" decoding="async" width="24" height="24" />
+              <span class="card-name">{p.name}</span>
+            </div>
+            <p class="card-desc">{p.description}</p>
+            <div class="badges">
+              <span class="badge">{p.license}</span>
+              <span class="badge">{p.hosting}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
 
-      <nav class="toc">
-        {data.map((c) => <a href={`#${slug(c.name)}`}>{c.name} ({c.projects.length})</a>)}
-        <a href="#comparison">Full comparison table</a>
-      </nav>
+  <section class="cat-section" id="comparison">
+    <h2>Full comparison</h2>
+    <p class="catdesc muted">Every listed platform with its category, license, and hosting model.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Platform</th><th>Category</th><th>License</th><th>Hosting</th></tr>
+        </thead>
+        <tbody>
+          {data.flatMap((c) => c.projects.map((p) => (
+            <tr>
+              <td><a href={`/platforms/${pslug(p.name)}/`}>{p.name}</a></td>
+              <td class="muted">{c.name}</td>
+              <td class="muted">{p.license}</td>
+              <td class="muted">{p.hosting}</td>
+            </tr>
+          )))}
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-      {data.map((c) => (
-        <section class="cat" id={slug(c.name)}>
-          <h2><a href={`/categories/${catSlug[c.name]}/`} style="color:inherit;text-decoration:none;">{c.name}</a></h2>
-          <p class="catdesc">{c.description}</p>
-          <div class="grid">
-            {c.projects.map((p) => (
-              <article class="card">
-                <h3>
-                  <img src={`https://github.com/${p.org}.png?size=44`} alt="" loading="lazy" />
-                  <a href={`/platforms/${pslug(p.name)}/`}>{p.name}</a>
-                </h3>
-                <p>{p.description}</p>
-                <div class="badges">
-                  <span class="badge">{p.license}</span>
-                  <span class="badge">{p.hosting}</span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      ))}
+  <style>
+    .small { font-size: 0.88rem; }
+    .hero { padding: 40px 0 8px; max-width: 760px; }
+    .hero h1 { font-size: 2.4rem; }
 
-      <section class="cat" id="comparison">
-        <h2>Full comparison</h2>
-        <p class="catdesc">Every listed project with its category, license, and hosting model.</p>
-        <table>
-          <thead>
-            <tr><th>Project</th><th>Category</th><th>License</th><th>Hosting</th></tr>
-          </thead>
-          <tbody>
-            {data.flatMap((c) =>
-              c.projects.map((p) => (
-                <tr>
-                  <td><a href={`/platforms/${pslug(p.name)}/`}>{p.name}</a></td>
-                  <td>{c.name}</td>
-                  <td>{p.license}</td>
-                  <td>{p.hosting}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </section>
+    .cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+    .cat-card {
+      display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "dot name count" "blurb blurb blurb";
+      gap: 4px 9px; align-items: center; padding: 14px 16px; border: 1px solid var(--line);
+      border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink);
+    }
+    .cat-card:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-1px); transition: .12s; }
+    .dot { width: 10px; height: 10px; border-radius: 3px; grid-area: dot; }
+    .cc-name { grid-area: name; font-weight: 600; font-size: 0.95rem; }
+    .cc-count { grid-area: count; color: var(--muted); font-size: 0.85rem; }
+    .cc-blurb { grid-area: blurb; color: var(--ink-2); font-size: 0.85rem; }
 
-      <footer>
-        Maintained alongside the
-        <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
-        repository. License and hosting notes reflect each linked repository at the time of the last
-        verification. Inclusion is not an endorsement. Site content is released under CC0 1.0.
-      </footer>
-    </main>
-  </body>
-</html>
+    .map { margin: 28px 0 8px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
+    .map img { display: block; width: 100%; height: auto; }
+    .map figcaption { padding: 10px 16px; border-top: 1px solid var(--line-2); }
+
+    .cat-section { margin-top: 48px; scroll-margin-top: 72px; }
+    .sec-head { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+    .sec-head h2 { margin: 0; font-size: 1.3rem; }
+    .sec-head h2 a { color: var(--ink); }
+    .sec-head h2 a:hover { color: var(--accent); }
+    .catdesc { margin: 12px 0 0; max-width: 70ch; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-top: 18px; }
+    .card { border: 1px solid var(--line); border-radius: 12px; padding: 15px 16px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); display: flex; flex-direction: column; gap: 9px; }
+    .card:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-1px); transition: .12s; }
+    .card-top { display: flex; align-items: center; gap: 10px; }
+    .card-top img { border-radius: 6px; background: #fff; }
+    .card-name { font-weight: 600; font-size: 1rem; }
+    .card-desc { margin: 0; font-size: 0.9rem; color: var(--ink-2); flex: 1; }
+
+    .table-scroll { overflow-x: auto; margin-top: 16px; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line-2); padding: 9px 12px 9px 0; vertical-align: top; white-space: nowrap; }
+    td.muted { white-space: normal; }
+    th { color: var(--muted); font-weight: 600; }
+
+    @media (max-width: 600px) { .hero h1 { font-size: 1.9rem; } }
+  </style>
+</Base>
