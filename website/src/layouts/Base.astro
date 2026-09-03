@@ -1,6 +1,7 @@
 ---
 const { title, description, path = "/", ld = null, wide = false } = Astro.props;
 const site = "https://aiagentplatforms.dev";
+const w = wide ? "wrap wide" : "wrap";
 const nav = [
   { href: "/platforms/", label: "Platforms" },
   { href: "/how-to-choose/", label: "How to choose" },
@@ -135,7 +136,7 @@ const here = (h) => path === h;
   </head>
   <body>
     <header class="site-header">
-      <div class="wrap bar">
+      <div class={`${w} bar`}>
         <a class="brand" href="/">
           <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
             <rect width="64" height="64" rx="14" fill="#16181d" />
@@ -156,12 +157,12 @@ const here = (h) => path === h;
       </div>
     </header>
 
-    <main class={wide ? "wrap wide" : "wrap"}>
+    <main class={w}>
       <slot />
     </main>
 
     <footer class="site-footer">
-      <div class="wrap cols">
+      <div class={`${w} cols`}>
         <div>
           <h4>AI Agent Platforms</h4>
           <p class="about">A maintained, open directory of open-source and source-available AI agent platforms, with license and hosting notes for each.</p>
@@ -190,7 +191,7 @@ const here = (h) => path === h;
           </ul>
         </div>
       </div>
-      <div class="wrap legal">
+      <div class={`${w} legal`}>
         Content released under CC0 1.0. Inclusion is not an endorsement. License and hosting notes
         reflect each project's repository at the last verification.
       </div>
