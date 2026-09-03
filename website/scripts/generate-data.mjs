@@ -18,6 +18,15 @@ const CATEGORIES = [
   "Coding agents",
 ];
 
+// Canonical category slugs, kept in sync with src/pages/categories/[slug].astro.
+const CATEGORY_SLUGS = {
+  "AI coworkers and teammates": "ai-coworkers",
+  "Agent builders and frameworks": "agent-builders",
+  "Workflow automation platforms": "workflow-automation",
+  "Browser agents": "browser-agents",
+  "Coding agents": "coding-agents",
+};
+
 const data = [];
 let current = null;
 for (const line of readme.split("\n")) {
@@ -69,15 +78,29 @@ if (existsSync(banner)) {
   console.warn("WARN media/social-preview.png missing; og:image will 404 until CI renders it");
 }
 
-// Sitemap covering all static routes.
+// Sitemap with lastmod, covering every static route.
+const lastmod = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
 const detailsPath = join(root, "src", "data", "platform-details.json");
 const slugs = existsSync(detailsPath)
   ? JSON.parse(readFileSync(detailsPath, "utf8")).map((p) => p.slug)
   : [];
-const urls = ["/", "/faq/", "/platforms/", ...slugs.map((s) => `/platforms/${s}/`)];
-const sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+const catRoutes = Object.values(CATEGORY_SLUGS).map((s) => `/categories/${s}/`);
+const urls = [
+  "/",
+  "/faq/",
+  "/how-to-choose/",
+  "/platforms/",
+  ...catRoutes,
+  ...slugs.map((s) => `/platforms/${s}/`),
+];
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-  ...urls.map((u) => `  <url><loc>https://aiagentplatforms.dev${u}</loc></url>`),
-  "</urlset>", ""].join("\n");
+  ...urls.map(
+    (u) => `  <url><loc>https://aiagentplatforms.dev${u}</loc><lastmod>${lastmod}</lastmod></url>`
+  ),
+  "</urlset>",
+  "",
+].join("\n");
 writeFileSync(join(root, "public", "sitemap.xml"), sitemap);
-console.log(`sitemap.xml: ${urls.length} urls`);
+console.log(`sitemap.xml: ${urls.length} urls, lastmod ${lastmod}`);

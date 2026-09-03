@@ -1,0 +1,108 @@
+---
+import Base from "../../layouts/Base.astro";
+import details from "../../data/platform-details.json";
+import { META } from "../../data/category-meta.js";
+
+export function getStaticPaths() {
+  return Object.entries(META).map(([slug, meta]) => ({
+    params: { slug },
+    props: { slug, meta, items: details.filter((p) => p.category === meta.category) },
+  }));
+}
+
+const { slug, meta, items } = Astro.props;
+const site = "https://aiagentplatforms.dev";
+const path = `/categories/${slug}/`;
+const others = Object.entries(META).filter(([s]) => s !== slug);
+const ld = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: meta.h1,
+    numberOfItems: items.length,
+    itemListElement: items.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.name,
+      url: `${site}/platforms/${p.slug}/`,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: meta.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "AI Agent Platforms", item: `${site}/` },
+      { "@type": "ListItem", position: 2, name: meta.h1, item: `${site}${path}` },
+    ],
+  },
+];
+---
+
+<Base
+  title={meta.title}
+  description={`${meta.lead.slice(0, 150)}`}
+  path={path}
+  ld={ld}
+>
+  <p class="muted" style="margin-top:24px;">
+    <a href="/">AI Agent Platforms</a> / {meta.h1}
+  </p>
+  <h1>{meta.h1}</h1>
+  <p>{meta.lead} There are {items.length} in this directory.</p>
+
+  <h2>What to look for</h2>
+  <ul class="features">
+    {meta.look.map((l) => <li>{l}</li>)}
+  </ul>
+
+  <h2>Platforms</h2>
+  <div class="grid">
+    {items.map((p) => (
+      <article class="card">
+        <h3 style="display:flex;align-items:center;gap:9px;margin:0 0 6px;">
+          <img src={`https://github.com/${p.org}.png?size=44`} alt="" loading="lazy" width="22" height="22" style="border-radius:5px;" />
+          <a href={`/platforms/${p.slug}/`}>{p.name}</a>
+        </h3>
+        <p style="margin:0 0 10px;font-size:0.9rem;color:#333;">{p.tagline}</p>
+        <div class="badges">
+          <span class="badge">{p.license}</span>
+          <span class="badge">{p.hosting}</span>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <h2>Common questions</h2>
+  {meta.faqs.map((f) => (
+    <details open>
+      <summary>{f.q}</summary>
+      <p>{f.a}</p>
+    </details>
+  ))}
+
+  <h2>Other categories</h2>
+  <p>
+    {others.map(([s, m]) => <a class="pill" href={`/categories/${s}/`}>{m.h1}</a>)}
+  </p>
+  <p class="muted">
+    See also the <a href="/how-to-choose/">guide to choosing a platform</a> and the
+    <a href="/">full landscape and market map</a>.
+  </p>
+
+  <style>
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin: 18px 0; }
+    .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+    .card a { text-decoration: none; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.74rem; }
+    .badge { background: #f2f4f7; border-radius: 5px; padding: 2px 8px; color: #444; }
+  </style>
+</Base>

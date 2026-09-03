@@ -4,6 +4,7 @@ const total = data.reduce((n, c) => n + c.projects.length, 0);
 const updated = "2026-09-02";
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pslug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const catSlug = {"AI coworkers and teammates": "ai-coworkers", "Agent builders and frameworks": "agent-builders", "Workflow automation platforms": "workflow-automation", "Browser agents": "browser-agents", "Coding agents": "coding-agents"};
 const site = "https://aiagentplatforms.dev";
 const title = `AI Agent Platforms: ${total} open-source AI coworkers, agent builders, and automation tools`;
 const description = `A maintained directory of ${total} AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting details for each.`;
@@ -101,7 +102,7 @@ const ld = [
         <p class="meta">
           Generated from the
           <a href="https://github.com/Agenta-AI/awesome-ai-agent-platforms">awesome-ai-agent-platforms</a>
-          list · updated {updated} · <a href="/platforms/">platform pages</a> · <a href="/faq/">FAQ</a> · contributions welcome via pull request.
+          list · updated {updated} · <a href="/platforms/">platform pages</a> · <a href="/how-to-choose/">how to choose</a> · <a href="/faq/">FAQ</a> · contributions welcome via pull request.
         </p>
       </header>
 
@@ -116,7 +117,7 @@ const ld = [
 
       {data.map((c) => (
         <section class="cat" id={slug(c.name)}>
-          <h2>{c.name}</h2>
+          <h2><a href={`/categories/${catSlug[c.name]}/`} style="color:inherit;text-decoration:none;">{c.name}</a></h2>
           <p class="catdesc">{c.description}</p>
           <div class="grid">
             {c.projects.map((p) => (

@@ -1,0 +1,114 @@
+---
+import Base from "../layouts/Base.astro";
+import details from "../data/platform-details.json";
+const total = details.length;
+const site = "https://aiagentplatforms.dev";
+const path = "/how-to-choose/";
+const title = "How to choose an AI agent platform: a practical guide";
+const description = "A practical guide to choosing an AI agent platform. Start from the job, then decide on self-hosting, license, framework versus product, model flexibility, and team needs.";
+const ld = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    url: `${site}${path}`,
+    datePublished: "2026-09-03",
+    author: { "@type": "Organization", name: "AI Agent Platforms" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "AI Agent Platforms", item: `${site}/` },
+      { "@type": "ListItem", position: 2, name: "How to choose", item: `${site}${path}` },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} path={path} ld={ld}>
+  <p class="muted" style="margin-top:24px;">
+    <a href="/">AI Agent Platforms</a> / How to choose
+  </p>
+  <h1>How to choose an AI agent platform</h1>
+  <p>
+    There are {total} open-source and source-available platforms in this directory, and they solve
+    different jobs. The fastest way to narrow the field is to answer a few concrete questions in
+    order, rather than comparing every tool at once. This guide walks through those questions and
+    points to the right category for each answer.
+  </p>
+
+  <h2>1. Start from the job, not the tool</h2>
+  <p>
+    Decide what you actually want to happen. If you want to delegate ongoing work to an agent that
+    uses your tools and returns finished output, look at
+    <a href="/categories/ai-coworkers/">AI coworkers and teammates</a>. If you are a developer who
+    wants to build custom agents, look at
+    <a href="/categories/agent-builders/">agent builders and frameworks</a>. If you need dependable
+    recurring processes across many services, look at
+    <a href="/categories/workflow-automation/">workflow automation platforms</a>. For narrower jobs,
+    there are dedicated <a href="/categories/coding-agents/">coding agents</a> and
+    <a href="/categories/browser-agents/">browser agents</a>.
+  </p>
+
+  <h2>2. Decide on self-hosting versus cloud</h2>
+  <p>
+    Self-hosting means running the software on your own machine or servers, which keeps your data and
+    tool credentials in your infrastructure. It takes more setup but gives you control and privacy.
+    A managed cloud is faster to start but sends your data to a vendor. Most platforms here can be
+    self-hosted, and many also offer an optional cloud. Each platform page states the exact hosting
+    model.
+  </p>
+
+  <h2>3. Read the license before you commit</h2>
+  <p>
+    Not everything called open source is licensed the same way. Standard open-source licenses such
+    as MIT and Apache 2.0 allow use, modification, and redistribution with few limits.
+    Source-available and fair-code licenses, such as the Sustainable Use License or a community
+    license, publish the code but restrict some commercial uses. This matters most if you plan to
+    build a product on top of the platform. Every entry in this directory states its exact license,
+    so check it against your intended use.
+  </p>
+
+  <h2>4. Framework, platform, or ready-to-use product</h2>
+  <p>
+    A framework is a code library you embed and control in code. A platform is a runnable product
+    with its own interface, often with a visual builder and deployment built in. A ready-to-use
+    coworker needs little setup and is managed like a team member. More control usually means more
+    setup. Match the choice to who will build and maintain the agents: an engineering team can use a
+    framework, while a small team without engineers is better served by a product.
+  </p>
+
+  <h2>5. Check model flexibility</h2>
+  <p>
+    Some platforms lock you to one model provider, while others let you choose the model or bring
+    your own subscription. If you already pay for a model provider, or you expect provider prices and
+    quality to keep changing, prefer a platform that lets you switch. Each platform page lists the
+    documented model support.
+  </p>
+
+  <h2>6. Consider team needs and operations</h2>
+  <p>
+    If more than one person will use or manage the agents, look for team sharing, access controls,
+    and a way to see what an agent did. For anything running unattended, look for scheduling,
+    logging, and observability. These operational features separate a demo from something you can
+    rely on.
+  </p>
+
+  <h2>A short decision checklist</h2>
+  <ul class="features">
+    <li>What is the job: delegate work, build agents, or automate a process?</li>
+    <li>Must it run on your own infrastructure?</li>
+    <li>Does the license fit your intended use, including any commercial plans?</li>
+    <li>Who maintains it: engineers who want a framework, or a team that needs a product?</li>
+    <li>Can you use the model or subscription you want?</li>
+    <li>Do you need team sharing, scheduling, and visibility into agent actions?</li>
+  </ul>
+
+  <p class="muted">
+    Once you have your answers, browse the matching
+    <a href="/platforms/">platform pages</a> for documented features, or start from the
+    <a href="/">market map</a> for the whole landscape.
+  </p>
+</Base>
