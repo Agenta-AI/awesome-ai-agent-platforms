@@ -66,6 +66,17 @@ def avatar_b64(org):
             return None
     return data_uri(p.read_bytes())
 
+# Orgs whose GitHub avatar is a personal photo, emoji, or blank, not a usable
+# logo. Render a clean monogram tile in the category color instead.
+FORCE_MONOGRAM = {"Agent Zero", "OpenWorker", "MetaGPT", "Open Interpreter"}
+
+def initials(name):
+    caps = [c for c in name if c.isupper()]
+    if len(caps) >= 2:
+        return caps[0] + caps[1]
+    letters = [c for c in name if c.isalnum()]
+    return ("".join(letters[:2]) or "?").upper()
+
 # Design tokens (validated reference dataviz palette).
 # Color is an accent on each category header, in fixed slot order; text stays
 # in ink tokens; containers are recessive surfaces with hairline borders.
@@ -143,7 +154,7 @@ for cat in CATEGORIES:
         r, c = divmod(i, cols)
         tx = MARGIN + CARD_PAD + c * TILE_W + (TILE_W - LOGO) // 2
         ty = y + CARD_TITLE_H + r * TILE_H + 8
-        b64 = avatar_b64(org)
+        b64 = None if name in FORCE_MONOGRAM else avatar_b64(org)
         tile = [f'<g transform="translate({tx},{ty})">']
         if b64:
             tile_bg = "#16181d" if needs_dark_tile(CACHE / f"{org}.png") else "#ffffff"
@@ -160,8 +171,11 @@ for cat in CATEGORIES:
             )
         else:
             tile.append(
-                f'<rect x="0" y="0" width="{LOGO}" height="{LOGO}" rx="9" '
-                f'fill="{PAGE}" stroke="{HAIRLINE}"/>'
+                f'<rect x="0" y="0" width="{LOGO}" height="{LOGO}" rx="9" fill="{ACCENT[cat]}"/>'
+            )
+            tile.append(
+                f'<text x="{LOGO // 2}" y="31" text-anchor="middle" font-family="{FONT}" '
+                f'font-size="19" font-weight="700" fill="#ffffff">{esc(initials(name))}</text>'
             )
         tile.append("</g>")
         body.extend(tile)
