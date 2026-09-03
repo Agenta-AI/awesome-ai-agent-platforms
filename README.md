@@ -1,6 +1,6 @@
 # Awesome AI Agent Platforms [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-> A curated list of AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting notes for every entry.
+> A curated list of open-source AI agent platforms: AI coworkers and teammates, agent builders and frameworks, workflow automation platforms, browser agents, and coding agents, with license and hosting notes for every entry.
 
 AI coworkers are persistent agents that people delegate real work to: they sign in to tools, keep context, run on schedules, and come back with finished work. This list covers the platforms that provide them, the frameworks developers build them with, and the automation and specialist agents around them.
 
