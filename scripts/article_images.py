@@ -36,11 +36,12 @@ CATS = [
     ("Coding agents", 5, "#4a3aa7", "Agents that read, edit, and ship code."),
 ]
 TOTAL = sum(c[1] for c in CATS)
-# Representative orgs across categories for the cover logo strip.
-# Six recognizable brand logos (avoid personal-photo avatars), one per lane where possible.
+# Logo strip for the cover. Agenta first and featured (this list is by Agenta),
+# then one recognizable brand per remaining lane. Avoid personal-photo avatars.
+FEATURED = "Agenta-AI"
 COVER_ORGS = [
-    "langchain-ai", "langgenius", "n8n-io",
-    "browser-use", "All-Hands-AI", "Skyvern-AI",
+    "Agenta-AI", "langchain-ai", "langgenius",
+    "n8n-io", "All-Hands-AI", "browser-use",
 ]
 
 
@@ -79,13 +80,14 @@ def esc(s):
 # ---------- Cover 1600x680 ----------
 W, H = 1600, 680
 s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">']
-s.append('<defs><clipPath id="lc"><rect x="0" y="0" width="84" height="84" rx="18"/></clipPath></defs>')
+s.append('<defs><clipPath id="lc"><rect x="0" y="0" width="84" height="84" rx="18"/></clipPath>'
+         '<clipPath id="bl"><rect x="0" y="0" width="64" height="64" rx="15"/></clipPath></defs>')
 s.append(f'<rect width="{W}" height="{H}" fill="{PAGE}"/>')
 seg = W / 5
 for i, (_, _, color, _) in enumerate(CATS):
     s.append(f'<rect x="{i*seg:.0f}" y="0" width="{seg:.0f}" height="10" fill="{color}"/>')
 # Left column
-s.append(f'<text x="72" y="118" font-family="{FONT}" font-size="22" font-weight="bold" letter-spacing="2" fill="{MUTED}">OPEN SOURCE  ·  {TOTAL} PROJECTS</text>')
+s.append(f'<text x="72" y="118" font-family="{FONT}" font-size="22" font-weight="bold" letter-spacing="2" fill="{MUTED}">OPEN SOURCE  ·  {TOTAL} PROJECTS  ·  CURATED BY AGENTA</text>')
 s.append(f'<text x="70" y="214" font-family="{FONT}" font-size="76" font-weight="bold" fill="{INK}">The AI agent</text>')
 s.append(f'<text x="70" y="298" font-family="{FONT}" font-size="76" font-weight="bold" fill="{INK}">platform landscape</text>')
 s.append(f'<text x="72" y="360" font-family="{FONT}" font-size="30" fill="{INK2}">AI coworkers, agent builders, workflow automation,</text>')
@@ -96,8 +98,18 @@ for name, _, color, _ in CATS:
     s.append(f'<circle cx="{x+9}" cy="492" r="9" fill="{color}"/>')
     s.append(f'<text x="{x+28}" y="500" font-family="{FONT}" font-size="24" fill="{INK}">{esc(name)}</text>')
     x += 28 + len(name) * 13 + 34
-s.append(f'<text x="72" y="612" font-family="{FONT}" font-size="26" font-weight="bold" fill="{INK2}">aiagentplatforms.dev</text>')
-# Right logo panel: 2 cols x 4 rows of 84px tiles
+# Agenta brand lockup (bottom-left): logo tile + wordmark + site.
+by64, bydark = avatar(FEATURED)
+if by64:
+    s.append('<g transform="translate(72,566)">')
+    s.append(f'<rect x="0" y="0" width="64" height="64" rx="15" fill="{"#16181d" if bydark else "#ffffff"}"/>')
+    s.append(f'<image x="0" y="0" width="64" height="64" clip-path="url(#bl)" href="{by64}"/>')
+    s.append('<rect x="0.5" y="0.5" width="63" height="63" rx="15" fill="none" stroke="rgba(16,24,40,0.12)"/>')
+    s.append('</g>')
+s.append(f'<text x="152" y="600" font-family="{FONT}" font-size="34" font-weight="bold" fill="{INK}">Agenta</text>')
+s.append(f'<text x="152" y="632" font-family="{FONT}" font-size="23" fill="{INK2}">aiagentplatforms.dev</text>')
+# Right logo panel: 2 cols x 3 rows of 84px tiles, Agenta featured with an accent ring.
+s.append(f'<text x="1150" y="118" font-family="{FONT}" font-size="18" font-weight="bold" letter-spacing="2" fill="{MUTED}">PLATFORMS</text>')
 gx, gy, step = 1150, 150, 106
 for i, org in enumerate(COVER_ORGS):
     r, c = divmod(i, 2)
@@ -107,6 +119,8 @@ for i, org in enumerate(COVER_ORGS):
         continue
     bg = "#16181d" if dark else "#ffffff"
     s.append(f'<g transform="translate({tx},{ty})">')
+    if org == FEATURED:
+        s.append(f'<rect x="-6" y="-6" width="96" height="96" rx="24" fill="none" stroke="{CATS[0][2]}" stroke-width="4"/>')
     s.append(f'<rect x="0" y="0" width="84" height="84" rx="18" fill="{bg}"/>')
     s.append(f'<image x="0" y="0" width="84" height="84" clip-path="url(#lc)" href="{b64}"/>')
     s.append(f'<rect x="0.5" y="0.5" width="83" height="83" rx="18" fill="none" stroke="rgba(16,24,40,0.10)"/>')
