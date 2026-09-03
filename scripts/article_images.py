@@ -147,3 +147,4 @@ for name, count, color, blurb in CATS:
 s.append("</svg>")
 (OUT / "categories.svg").write_text("\n".join(s))
 print("OK media/categories.svg")
+# render at 2x
