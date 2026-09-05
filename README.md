@@ -34,6 +34,7 @@ Platforms that give an individual or a team persistent agents they can delegate 
 - [OpenClaw](https://github.com/openclaw/openclaw) - Assistant that connects models, tools, messaging channels, and companion applications through one gateway. License: MIT. Hosting: self-hosted on a device or server.
 - [OpenWork](https://github.com/different-ai/openwork) - Desktop workspace for using and sharing agent workflows across files and connected services. License: mixed, open-source and separately licensed portions. Hosting: local desktop or organization-managed.
 - [OpenWorker](https://github.com/andrewyng/openworker) - Desktop coworker that completes everyday tasks across files, applications, and Slack. License: MIT. Hosting: local desktop.
+- [Orkas](https://github.com/Orkas-AI/Orkas) - Local-first desktop AI workforce whose Commander coordinates specialist agents through one chat. License: MIT. Hosting: local desktop.
 - [Paperclip](https://github.com/paperclipai/paperclip) - Control plane for assigning goals, roles, budgets, and work to teams of external agents. License: MIT. Hosting: self-hosted.
 
 ## Agent builders and frameworks
