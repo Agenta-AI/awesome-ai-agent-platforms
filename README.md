@@ -25,6 +25,7 @@ Platforms that give an individual or a team persistent agents they can delegate 
 
 - [Agent Zero](https://github.com/frdel/agent-zero) - Personal agent with a Linux desktop, browser, files, skills, and plugins. License: MIT. Hosting: self-hosted with Docker; desktop launcher available.
 - [Agenta](https://github.com/agenta-ai/agenta) - Workspace for building AI coworkers and automations through chat, sharing them with a team, and running them interactively or in the background. License: MIT core, separately licensed enterprise features. Hosting: self-hosted; hosted service available.
+- [CubePlex](https://github.com/cubeplexai/cubeplex) - Self-hosted AI agent workspace for teams with multi-model chat, memory, skills, MCP tools, sandboxes, policies, and Docker Compose or Kubernetes deploy. License: CubePlex Community License (Apache-2.0 based, with conditions; Enterprise components separately licensed). Hosting: self-hosted.
 - [Eigent](https://github.com/eigent-ai/eigent) - Desktop application for building and managing a workforce of agents that completes multi-step tasks. License: Apache-2.0. Hosting: local desktop.
 - [Hermes Agent](https://github.com/NousResearch/hermes-agent) - Personal agent with memory, skills, tools, scheduled jobs, and messaging channels. License: MIT. Hosting: self-hosted; desktop application available.
 - [Kuse Cowork](https://github.com/kuse-ai/kuse_cowork) - Local-first desktop coworker that works across documents and tasks with user-selected models. License: MIT. Hosting: local desktop; optional Docker isolation.
