@@ -80,6 +80,7 @@ Platforms and runtimes for repeatable workflows, scheduled jobs, and event-drive
 
 Agents specialized in operating web browsers and automating tasks on websites.
 
+- [Agent QA](https://github.com/vostride/agent-qa) - Runs regression tests written in natural language against web, Android, and iOS applications by driving a real browser or device and recording the steps, screenshots, and results. License: FSL-1.1-ALv2, source-available, with each release converting to Apache-2.0 two years after publication. Hosting: self-hosted, runs locally as a CLI, MCP server, and dashboard.
 - [Browser Use](https://github.com/browser-use/browser-use) - Python library that lets agents control web browsers and automate online tasks. License: MIT. Hosting: self-hosted; vendor cloud available.
 - [Skyvern](https://github.com/Skyvern-AI/skyvern) - Browser automation platform that uses agents and computer vision to complete website workflows. License: AGPL-3.0. Hosting: self-hosted; vendor cloud available.
 
