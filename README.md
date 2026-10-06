@@ -95,6 +95,7 @@ Agents specialized in writing, editing, and shipping code.
 - [Hotdog](https://github.com/devoidfury/hotdog) - Coding agent that runs straight from source on bun, no install step, fully auditable source, and extension system. License: MIT. Hosting: runs locally.
 - [Open Interpreter](https://github.com/openinterpreter/open-interpreter) - Coding agent optimized for low-cost models that emulates multiple agent harnesses. License: Apache-2.0. Hosting: runs locally.
 - [OpenHands](https://github.com/All-Hands-AI/OpenHands) - Platform for software development agents that runs coding agents across local, remote, and cloud backends. License: MIT. Hosting: self-hosted; vendor cloud available.
+- [YYLO](https://github.com/yylo-dev/yylo) - Command-line orchestrator that drives coding agents such as Claude, Codex, and Gemini through typed task, validation, and merge workflows with receipt-backed repository changes. License: MIT. Hosting: runs locally in the terminal.
 
 ## Selection criteria
 
