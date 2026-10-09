@@ -25,6 +25,7 @@ Platforms that give an individual or a team persistent agents they can delegate 
 
 - [Agent Zero](https://github.com/frdel/agent-zero) - Personal agent with a Linux desktop, browser, files, skills, and plugins. License: MIT. Hosting: self-hosted with Docker; desktop launcher available.
 - [Agenta](https://github.com/agenta-ai/agenta) - Workspace for building AI coworkers and automations through chat, sharing them with a team, and running them interactively or in the background. License: MIT core, separately licensed enterprise features. Hosting: self-hosted; hosted service available.
+- [Drevon Enterprise](https://www.drevon.dev/enterprise) - Self-hosted agent platform where agents act with each user's own credentials, every tool call is logged, and irreversible actions wait for approval. License: proprietary. Hosting: self-hosted with Terraform/Helm in your VPC, on-prem or air-gapped.
 - [Eigent](https://github.com/eigent-ai/eigent) - Desktop application for building and managing a workforce of agents that completes multi-step tasks. License: Apache-2.0. Hosting: local desktop.
 - [General Input](https://www.generalinput.com) - Web application that turns everyday business processes into AI‑powered systems your whole team can understand, monitor, and share. License: proprietary. Hosting: vendor-hosted; managed on-prem deployment available.
 - [Hermes Agent](https://github.com/NousResearch/hermes-agent) - Personal agent with memory, skills, tools, scheduled jobs, and messaging channels. License: MIT. Hosting: self-hosted; desktop application available.
