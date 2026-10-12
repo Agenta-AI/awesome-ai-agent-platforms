@@ -285,6 +285,29 @@
   "verified": "2026-09-02"
  },
  {
+  "slug": "tecadrise-bot",
+  "name": "TecAdRise Bot",
+  "org": "tecadrise-ai",
+  "repo": "https://github.com/tecadrise-ai/TecAdRiseBot",
+  "category": "AI coworkers and teammates",
+  "license": "MIT",
+  "hosting": "local desktop",
+  "tagline": "Local desktop multi-agent chat shell powered by the Cursor TypeScript SDK.",
+  "overview": "TecAdRise Bot is an open-source Windows desktop application for running named AI agents locally through Electron and the Cursor TypeScript SDK. It is used by builders who want persistent multi-agent chat with per-agent workspaces, schedules, shared memory, and inter-bot messaging on their own machine.",
+  "features": [
+    "Runs a local Electron desktop multi-agent chat shell on Windows",
+    "Gives each agent its own name, model, instructions, and workspace",
+    "Supports scheduled routines and inter-bot messaging between agents",
+    "Keeps shared long-term memory in a host memory directory across agents",
+    "Attaches files and images into agent workspaces for turn context",
+    "Exposes a localhost HTTP control plane for agent configuration and peer messages",
+    "Uses the Cursor TypeScript SDK so agents run through Cursor on the local machine",
+    "Ships as free open-source software under the MIT license"
+  ],
+  "website": "https://tecadrise.ai/products/tecadrisebot",
+  "verified": "2026-10-12"
+ },
+ {
   "slug": "agno",
   "name": "Agno",
   "org": "agno-agi",
