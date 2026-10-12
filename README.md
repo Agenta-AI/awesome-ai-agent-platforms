@@ -37,6 +37,7 @@ Platforms that give an individual or a team persistent agents they can delegate 
 - [OpenWorker](https://github.com/andrewyng/openworker) - Desktop coworker that completes everyday tasks across files, applications, and Slack. License: MIT. Hosting: local desktop.
 - [Orkas](https://github.com/Orkas-AI/Orkas) - Local-first desktop AI workforce whose Commander coordinates specialist agents through one chat. License: MIT. Hosting: local desktop.
 - [Paperclip](https://github.com/paperclipai/paperclip) - Control plane for assigning goals, roles, budgets, and work to teams of external agents. License: MIT. Hosting: self-hosted.
+- [SuperAgent](https://github.com/pungme/superagent-desktop) - macOS desktop app that runs Claude Code or Codex in a persistent chat and gives them a browser to drive on your own logins, an iOS Simulator, scheduled routines, and a phone companion for monitoring runs remotely. License: MIT. Hosting: runs locally on macOS.
 
 ## Agent builders and frameworks
 
