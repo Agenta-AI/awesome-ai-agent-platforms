@@ -95,6 +95,7 @@ Agents specialized in writing, editing, and shipping code.
 - [Hotdog](https://github.com/devoidfury/hotdog) - Coding agent that runs straight from source on bun, no install step, fully auditable source, and extension system. License: MIT. Hosting: runs locally.
 - [Open Interpreter](https://github.com/openinterpreter/open-interpreter) - Coding agent optimized for low-cost models that emulates multiple agent harnesses. License: Apache-2.0. Hosting: runs locally.
 - [OpenHands](https://github.com/All-Hands-AI/OpenHands) - Platform for software development agents that runs coding agents across local, remote, and cloud backends. License: MIT. Hosting: self-hosted; vendor cloud available.
+- [workkit](https://github.com/ITW-Creative-Works/workkit) - Claude Code plugin that runs GitHub Issues as a coding pipeline from spec to ship, with subagents that build and blind-review each change and hooks that block a commit until the tests pass. License: FSL-1.1-MIT. Hosting: runs locally inside Claude Code.
 
 ## Selection criteria
 
