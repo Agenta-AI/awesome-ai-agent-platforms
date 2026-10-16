@@ -82,6 +82,7 @@ Platforms and runtimes for repeatable workflows, scheduled jobs, and event-drive
 
 Agents specialized in operating web browsers and automating tasks on websites.
 
+- [Agent Browser](https://github.com/vercel-labs/agent-browser) - Browser automation CLI for AI agents with semantic snapshots, session persistence, and scriptable browser control. License: Apache-2.0. Hosting: runs locally.
 - [Browser Use](https://github.com/browser-use/browser-use) - Python library that lets agents control web browsers and automate online tasks. License: MIT. Hosting: self-hosted; vendor cloud available.
 - [Skyvern](https://github.com/Skyvern-AI/skyvern) - Browser automation platform that uses agents and computer vision to complete website workflows. License: AGPL-3.0. Hosting: self-hosted; vendor cloud available.
 
