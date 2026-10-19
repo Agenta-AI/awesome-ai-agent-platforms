@@ -83,6 +83,7 @@ Platforms and runtimes for repeatable workflows, scheduled jobs, and event-drive
 Agents specialized in operating web browsers and automating tasks on websites.
 
 - [Browser Use](https://github.com/browser-use/browser-use) - Python library that lets agents control web browsers and automate online tasks. License: MIT. Hosting: self-hosted; vendor cloud available.
+- [qz](https://github.com/alibaba/qz-browser-agent) - Browser agent that runs in your own Chrome as an extension, works across the sites you're already signed in to, and can be called by coding agents through its CLI and MCP. License: Apache-2.0. Hosting: local Chrome extension; bring your own model API key.
 - [Skyvern](https://github.com/Skyvern-AI/skyvern) - Browser automation platform that uses agents and computer vision to complete website workflows. License: AGPL-3.0. Hosting: self-hosted; vendor cloud available.
 
 ## Coding agents
