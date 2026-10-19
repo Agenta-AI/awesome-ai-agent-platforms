@@ -24,6 +24,7 @@ Browse this list as a website with a full comparison table at [aiagentplatforms.
 Platforms that give an individual or a team persistent agents they can delegate work to through chat, a desktop, or a shared workspace.
 
 - [Agent Zero](https://github.com/frdel/agent-zero) - Personal agent with a Linux desktop, browser, files, skills, and plugins. License: MIT. Hosting: self-hosted with Docker; desktop launcher available.
+- [agentforge](https://github.com/iamaanahmad/agentforge) - Single-owner AI workbench for saved tasks, specialist workers, approvals, and activity history. License: MIT. Hosting: self-hosted with Docker.
 - [Agenta](https://github.com/agenta-ai/agenta) - Workspace for building AI coworkers and automations through chat, sharing them with a team, and running them interactively or in the background. License: MIT core, separately licensed enterprise features. Hosting: self-hosted; hosted service available.
 - [Eigent](https://github.com/eigent-ai/eigent) - Desktop application for building and managing a workforce of agents that completes multi-step tasks. License: Apache-2.0. Hosting: local desktop.
 - [General Input](https://www.generalinput.com) - Web application that turns everyday business processes into AI‑powered systems your whole team can understand, monitor, and share. License: proprietary. Hosting: vendor-hosted; managed on-prem deployment available.
