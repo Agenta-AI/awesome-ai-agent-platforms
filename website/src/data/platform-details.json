@@ -1006,6 +1006,28 @@
   "verified": "2026-09-02"
  },
  {
+  "slug": "open-cuak",
+  "name": "Open-CUAK",
+  "org": "Aident-AI",
+  "repo": "https://github.com/Aident-AI/open-cuak",
+  "category": "Browser agents",
+  "license": "Apache-2.0",
+  "hosting": "self-hosted; vendor cloud available",
+  "tagline": "Open-source platform for running and managing vision-based browser automation agents.",
+  "overview": "Open-CUAK (Open Computer Use Agent Kit) is an open-source platform from Aident AI for running browser automation agents that see and operate web pages the way a person does. Developers install it locally with Homebrew or build it with Docker, connect a vision-capable model, and run Operator-style workflows in a dedicated remote browser or through a browser extension.",
+  "features": [
+   "Runs Operator-style browser automation workflows locally",
+   "Uses vision-based automation to operate web pages",
+   "Provides a dedicated remote browser so agents do not use the user's own browser",
+   "Includes a browser extension that turns an existing browser into an agent companion",
+   "Works with vision-compatible models such as Claude, Gemini, and LLaVA",
+   "Manages cookies so agents can stay signed in to sites",
+   "Installs with Homebrew (open-cuak start) or builds from source with Docker"
+  ],
+  "website": "https://aident.ai",
+  "verified": "2026-10-20"
+ },
+ {
   "slug": "skyvern",
   "name": "Skyvern",
   "org": "Skyvern-AI",
