@@ -82,6 +82,7 @@ Platforms and runtimes for repeatable workflows, scheduled jobs, and event-drive
 
 Agents specialized in operating web browsers and automating tasks on websites.
 
+- [AgentGo](https://github.com/Moha2005269/agentgo) - Chromium-based browser that AI agents drive over MCP, reading pages as compact outlines and acting with real mouse and keyboard input. License: BUSL-1.1 (MCP server MIT). Hosting: runs locally on Windows 11.
 - [Browser Use](https://github.com/browser-use/browser-use) - Python library that lets agents control web browsers and automate online tasks. License: MIT. Hosting: self-hosted; vendor cloud available.
 - [Skyvern](https://github.com/Skyvern-AI/skyvern) - Browser automation platform that uses agents and computer vision to complete website workflows. License: AGPL-3.0. Hosting: self-hosted; vendor cloud available.
 
