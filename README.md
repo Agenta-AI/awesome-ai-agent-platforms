@@ -90,6 +90,7 @@ Agents specialized in operating web browsers and automating tasks on websites.
 Agents specialized in writing, editing, and shipping code.
 
 - [Aider](https://github.com/Aider-AI/aider) - Terminal-based AI pair programming tool for creating and editing codebases with many model providers. License: Apache-2.0. Hosting: runs locally in the terminal.
+- [Aixle Flow](https://github.com/AixleHQ/flow) - Kanban board that runs CLI coding agents such as Claude Code, Codex, and Gemini CLI in isolated containers, with each card executing a durable multi-step workflow that can pause for human approval. License: Apache-2.0. Hosting: self-hosted.
 - [Cline](https://github.com/cline/cline) - Autonomous coding agent available as an IDE extension, CLI, and SDK. License: Apache-2.0. Hosting: runs locally in the IDE or terminal.
 - [Goose](https://github.com/block/goose) - Coding agent from Block that runs locally as a CLI or desktop application and extends beyond code tasks. License: Apache-2.0. Hosting: runs locally.
 - [Hotdog](https://github.com/devoidfury/hotdog) - Coding agent that runs straight from source on bun, no install step, fully auditable source, and extension system. License: MIT. Hosting: runs locally.
