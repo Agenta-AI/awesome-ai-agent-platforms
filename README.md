@@ -58,6 +58,9 @@ Frameworks and visual tools developers use to create, connect, run, and inspect 
 - [Pydantic AI](https://github.com/pydantic/pydantic-ai) - Typed Python agent framework with model portability, tools, and durable execution. License: MIT. Hosting: library for self-managed applications; vendor platform available.
 - [Sim](https://github.com/simstudioai/sim) - Collaborative visual workspace for building, deploying, and monitoring agents and workflows. License: Apache-2.0. Hosting: self-hosted; vendor cloud available.
 - [smolagents](https://github.com/huggingface/smolagents) - Compact Python library for agents that act through code or tool calls. License: Apache-2.0. Hosting: library for self-managed applications.
+- [PromptImage](https://promptimage.cloud) - Free AI image & video studio with a prompt library (signup credits, multi-model). Freemium
+- [TeslaWraps](https://teslawraps.design) - Browser Tesla Paint Shop wrap designer — core editing + PNG export free without account; optional AI credit…
+- [GrokVideo Studio](https://grokvideogenerator.dev) - Independent web app for text/image-to-video via Grok Imagine API (Free Trial, 20 credits). Not an official …
 
 ## Workflow automation platforms
 
