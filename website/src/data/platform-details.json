@@ -387,7 +387,7 @@
   "license": "Apache-2.0 core, separately licensed enterprise features",
   "hosting": "self-hosted; vendor cloud available",
   "tagline": "Visual drag-and-drop builder for AI agents and language-model workflows.",
-  "overview": "Flowise is a visual builder for constructing AI agents and LLM workflows with a low-code interface. It is used by developers and organizations who want to assemble chatbots, RAG systems, and multi-agent flows without writing everything in code. The GitHub repository was archived in August 2026.",
+  "overview": "Flowise is a visual builder for constructing AI agents and LLM workflows with a low-code interface. It is used by developers and organizations who want to assemble chatbots, RAG systems, and multi-agent flows without writing everything in code. The GitHub repository was archived in August 2026, and the project reached end of life on August 31, 2026, with no further updates or security fixes.",
   "features": [
    "Builds agent flows through a drag-and-drop visual interface",
    "Supports multi-agent systems",
