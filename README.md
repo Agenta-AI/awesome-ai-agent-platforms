@@ -91,6 +91,7 @@ Agents specialized in writing, editing, and shipping code.
 
 - [Aider](https://github.com/Aider-AI/aider) - Terminal-based AI pair programming tool for creating and editing codebases with many model providers. License: Apache-2.0. Hosting: runs locally in the terminal.
 - [Cline](https://github.com/cline/cline) - Autonomous coding agent available as an IDE extension, CLI, and SDK. License: Apache-2.0. Hosting: runs locally in the IDE or terminal.
+- [DevIntern](https://github.com/getdevintern/devintern) - Worker that routes Jira, Linear, and GitHub Issues tickets across multiple repositories, opens pull requests with Claude Code, Codex, Cursor, or OpenCode after an optional self-review pass, and runs scheduled automations and Sentry fixes. License: FSL-1.1-ALv2 (source-available). Hosting: self-hosted; runs locally as a CLI daemon.
 - [Goose](https://github.com/block/goose) - Coding agent from Block that runs locally as a CLI or desktop application and extends beyond code tasks. License: Apache-2.0. Hosting: runs locally.
 - [Hotdog](https://github.com/devoidfury/hotdog) - Coding agent that runs straight from source on bun, no install step, fully auditable source, and extension system. License: MIT. Hosting: runs locally.
 - [Open Interpreter](https://github.com/openinterpreter/open-interpreter) - Coding agent optimized for low-cost models that emulates multiple agent harnesses. License: Apache-2.0. Hosting: runs locally.
