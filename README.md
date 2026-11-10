@@ -83,7 +83,8 @@ Platforms and runtimes for repeatable workflows, scheduled jobs, and event-drive
 Agents specialized in operating web browsers and automating tasks on websites.
 
 - [Browser Use](https://github.com/browser-use/browser-use) - Python library that lets agents control web browsers and automate online tasks. License: MIT. Hosting: self-hosted; vendor cloud available.
-- [Skyvern](https://github.com/Skyvern-AI/skyvern) - Browser automation platform that uses agents and computer vision to complete website workflows. License: AGPL-3.0. Hosting: self-hosted; vendor cloud available.
+- [easi.run](https://github.com/julianosig/easi.run) - Chrome runtime exposing MCP and REST controls to connected AI agents, with live viewing and human takeover. License: AGPL-3.0-only. Hosting: self-hosted on Linux with Docker; agent/model resources required.
+- - [Skyvern](https://github.com/Skyvern-AI/skyvern) - Browser automation platform that uses agents and computer vision to complete website workflows. License: AGPL-3.0. Hosting: self-hosted; vendor cloud available.
 
 ## Coding agents
 
