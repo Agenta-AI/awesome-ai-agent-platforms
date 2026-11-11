@@ -37,6 +37,7 @@ Platforms that give an individual or a team persistent agents they can delegate 
 - [OpenWorker](https://github.com/andrewyng/openworker) - Desktop coworker that completes everyday tasks across files, applications, and Slack. License: MIT. Hosting: local desktop.
 - [Orkas](https://github.com/Orkas-AI/Orkas) - Local-first desktop AI workforce whose Commander coordinates specialist agents through one chat. License: MIT. Hosting: local desktop.
 - [Paperclip](https://github.com/paperclipai/paperclip) - Control plane for assigning goals, roles, budgets, and work to teams of external agents. License: MIT. Hosting: self-hosted.
+- [Raven](https://github.com/EverMind-AI/Raven) - Host agent that plans complex tasks as DAGs and orchestrates built-in research, coding, design, and on-call agents alongside third-party agents such as Claude Code, Codex, and Hermes Agent, with cross-session memory and scheduled execution. License: Apache-2.0. Hosting: self-hosted; local install or Docker Compose.
 
 ## Agent builders and frameworks
 
