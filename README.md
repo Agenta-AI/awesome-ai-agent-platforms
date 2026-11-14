@@ -93,6 +93,7 @@ Agents specialized in writing, editing, and shipping code.
 - [Cline](https://github.com/cline/cline) - Autonomous coding agent available as an IDE extension, CLI, and SDK. License: Apache-2.0. Hosting: runs locally in the IDE or terminal.
 - [Goose](https://github.com/block/goose) - Coding agent from Block that runs locally as a CLI or desktop application and extends beyond code tasks. License: Apache-2.0. Hosting: runs locally.
 - [Hotdog](https://github.com/devoidfury/hotdog) - Coding agent that runs straight from source on bun, no install step, fully auditable source, and extension system. License: MIT. Hosting: runs locally.
+- [Kodama](https://github.com/optimiware/kodama) - API-first, multi-tenant software factory that runs sequential container pipelines and AI coding agents (Claude Code, OpenCode, Codex, Pi, or native `kodama agent`) with PostgreSQL RLS, NATS JetStream, REST/MCP edges, gitolite-style Git access rules, and human-in-the-loop role inbox approvals. License: Apache-2.0. Hosting: self-hosted on Kubernetes or Podman.
 - [Open Interpreter](https://github.com/openinterpreter/open-interpreter) - Coding agent optimized for low-cost models that emulates multiple agent harnesses. License: Apache-2.0. Hosting: runs locally.
 - [OpenHands](https://github.com/All-Hands-AI/OpenHands) - Platform for software development agents that runs coding agents across local, remote, and cloud backends. License: MIT. Hosting: self-hosted; vendor cloud available.
 
