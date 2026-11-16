@@ -23,6 +23,7 @@ Browse this list as a website with a full comparison table at [aiagentplatforms.
 
 Platforms that give an individual or a team persistent agents they can delegate work to through chat, a desktop, or a shared workspace.
 
+- [5dive](https://github.com/5dive-ai/5dive) - A team of AI agents on a server you own. License: MIT. Hosting: self-hosted.
 - [Agent Zero](https://github.com/frdel/agent-zero) - Personal agent with a Linux desktop, browser, files, skills, and plugins. License: MIT. Hosting: self-hosted with Docker; desktop launcher available.
 - [Agenta](https://github.com/agenta-ai/agenta) - Workspace for building AI coworkers and automations through chat, sharing them with a team, and running them interactively or in the background. License: MIT core, separately licensed enterprise features. Hosting: self-hosted; hosted service available.
 - [Eigent](https://github.com/eigent-ai/eigent) - Desktop application for building and managing a workforce of agents that completes multi-step tasks. License: Apache-2.0. Hosting: local desktop.
