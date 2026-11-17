@@ -37,6 +37,7 @@ Platforms that give an individual or a team persistent agents they can delegate 
 - [OpenWorker](https://github.com/andrewyng/openworker) - Desktop coworker that completes everyday tasks across files, applications, and Slack. License: MIT. Hosting: local desktop.
 - [Orkas](https://github.com/Orkas-AI/Orkas) - Local-first desktop AI workforce whose Commander coordinates specialist agents through one chat. License: MIT. Hosting: local desktop.
 - [Paperclip](https://github.com/paperclipai/paperclip) - Control plane for assigning goals, roles, budgets, and work to teams of external agents. License: MIT. Hosting: self-hosted.
+- [Trina AX](https://github.com/trina-app/trina-ax) - Team workspace that runs Claude Code and Codex agents on shared company files, team skills, and MCP tools, with folder permissions checked per person. License: AGPL-3.0. Hosting: self-hosted; vendor-hosted available.
 
 ## Agent builders and frameworks
 
