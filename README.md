@@ -95,6 +95,7 @@ Agents specialized in writing, editing, and shipping code.
 - [Hotdog](https://github.com/devoidfury/hotdog) - Coding agent that runs straight from source on bun, no install step, fully auditable source, and extension system. License: MIT. Hosting: runs locally.
 - [Open Interpreter](https://github.com/openinterpreter/open-interpreter) - Coding agent optimized for low-cost models that emulates multiple agent harnesses. License: Apache-2.0. Hosting: runs locally.
 - [OpenHands](https://github.com/All-Hands-AI/OpenHands) - Platform for software development agents that runs coding agents across local, remote, and cloud backends. License: MIT. Hosting: self-hosted; vendor cloud available.
+- [Orbi](https://github.com/orbi-build/orbi) - Takes a labelled GitHub Issue to a pull request, has a separate review session check it against the acceptance criteria, merges only the reviewed head, and cuts a tagged release. License: AGPL-3.0. Hosting: self-hosted runner, or the managed Orbi Cloud.
 
 ## Selection criteria
 
