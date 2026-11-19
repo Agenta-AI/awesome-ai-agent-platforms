@@ -43,6 +43,7 @@ Platforms that give an individual or a team persistent agents they can delegate 
 Frameworks and visual tools developers use to create, connect, run, and inspect agents.
 
 - [Agno](https://github.com/agno-agi/agno) - Python framework and runtime for building agents, serving them through an API, and managing them in a web interface. License: Apache-2.0. Hosting: self-hosted; vendor cloud available.
+- [Ailoy](https://github.com/brekkylab/ailoy) - SDK for Python, Node.js and Rust that builds agents and runs each agent's commands and file tools in its own Linux microVM. License: Apache-2.0. Hosting: library for self-managed applications.
 - [CAMEL](https://github.com/camel-ai/camel) - Python framework for researching and building agents, multi-agent systems, tasks, and simulated environments. License: Apache-2.0. Hosting: library for self-managed applications.
 - [CrewAI](https://github.com/crewAIInc/crewAI) - Python framework for coordinating role-based agents and structured task flows. License: MIT. Hosting: self-hosted framework; vendor platform available.
 - [Dify](https://github.com/langgenius/dify) - Platform for building AI workflows, retrieval pipelines, and agentic applications with broad model support. License: Dify Open Source License (Apache-2.0 based, with conditions). Hosting: self-hosted; vendor cloud available.
