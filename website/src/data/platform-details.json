@@ -220,7 +220,7 @@
   "repo": "https://github.com/different-ai/openwork",
   "category": "AI coworkers and teammates",
   "license": "mixed, open-source and separately licensed portions",
-  "hosting": "local desktop or organization-managed",
+  "hosting": "local desktop; self-hosted control plane, vendor-hosted available",
   "tagline": "Desktop app for sharing AI workflows, skills, and connected services across agents and teams.",
   "overview": "OpenWork is a free desktop app for sharing AI workflows, positioned as an open-source alternative to Claude Cowork and Codex for macOS, Windows, and Linux. It is used by individuals and organizations that want to reuse skills and connected services across agents such as Claude Code, Cursor, and Codex.",
   "features": [
